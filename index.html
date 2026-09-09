@@ -20,8 +20,9 @@
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.55;}
   h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; margin:0;}
 
-  .masthead{background:var(--navy); color:#fff;}
-  .masthead-inner{max-width:880px; margin:0 auto; padding:20px 24px; display:flex; align-items:center; gap:14px;}
+  .masthead{background:var(--navy); color:#fff; position:relative;}
+  .masthead-inner{max-width:880px; margin:0 auto; padding:20px 24px 34px; display:flex; align-items:center; gap:14px;}
+  .masthead-wave{display:block; width:100%; height:28px; margin-top:-1px;}
   .masthead img{height:38px; width:auto; display:block;}
   .masthead-text{display:flex; flex-direction:column; gap:1px;}
   .masthead-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:1rem;}
@@ -29,19 +30,22 @@
 
   .wrap{max-width:880px; margin:0 auto; padding:0 24px 70px;}
 
-  .hero{margin:28px 0 34px; padding:40px 36px; border-radius:20px; color:#fff;
+  .hero{position:relative; margin:28px 0 46px; padding:40px 36px 56px; border-radius:28px; color:#fff; overflow:hidden;
         background:linear-gradient(135deg, var(--navy), var(--teal));
         box-shadow:0 8px 24px rgba(19,44,58,.18);}
-  .hero-eyebrow{font-size:.78rem; opacity:.85; font-weight:600; margin-bottom:8px; letter-spacing:.3px;}
-  .hero h1{font-size:1.8rem; line-height:1.3; max-width:26ch;}
-  .hero p{opacity:.92; font-size:.96rem; margin-top:12px; max-width:56ch;}
+  .hero-blob{position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,.08); pointer-events:none;}
+  .hero-blob2{position:absolute; bottom:-90px; right:80px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.06); pointer-events:none;}
+  .hero-wave{position:absolute; left:0; right:0; bottom:-1px; width:100%; height:44px; display:block;}
+  .hero-eyebrow{font-size:.78rem; opacity:.85; font-weight:600; margin-bottom:8px; letter-spacing:.3px; position:relative;}
+  .hero h1{font-size:1.8rem; line-height:1.3; max-width:26ch; position:relative;}
+  .hero p{opacity:.92; font-size:.96rem; margin-top:12px; max-width:56ch; position:relative;}
 
   .section-label{font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--ink-muted); font-weight:600; margin:8px 0 16px;}
   .grid{display:grid; grid-template-columns:1fr; gap:18px;}
   @media(min-width:660px){ .grid{grid-template-columns:1fr 1fr;} }
 
   a.card-link{ text-decoration:none; color:inherit; display:block; }
-  .card{background:var(--surface); border:1px solid var(--rule); border-radius:18px; padding:26px 24px; height:100%;
+  .card{background:var(--surface); border:1px solid var(--rule); border-radius:18px; padding:26px 24px; height:100%; position:relative;
         box-shadow:0 3px 10px rgba(19,44,58,.06); transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
   a.card-link:hover .card{ transform:translateY(-6px); box-shadow:0 16px 30px rgba(19,44,58,.16); border-color:var(--teal); }
   .card.disabled{opacity:.6;}
@@ -56,7 +60,7 @@
   .card-desc{font-size:.86rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;}
   .pill{display:inline-block; font-size:.78rem; font-weight:600; padding:7px 18px; border-radius:999px; border:1.5px solid var(--teal); color:var(--teal);}
   .pill.grey{border-color:var(--rule); color:var(--ink-muted);}
-  .badge-status{position:absolute; margin-top:-42px; margin-left:calc(100% - 90px); font-size:.62rem; font-weight:700; padding:3px 10px; border-radius:999px; letter-spacing:.3px;}
+  .badge-status{position:absolute; top:20px; right:20px; font-size:.62rem; font-weight:700; padding:3px 10px; border-radius:999px; letter-spacing:.3px;}
   .badge-status.live{background:var(--ok-bg); color:var(--ok);}
   .badge-status.soon{background:var(--rule-soft); color:var(--ink-muted);}
 
@@ -75,14 +79,22 @@
       <div class="masthead-sub">Sistem Casemix</div>
     </div>
   </div>
+  <svg class="masthead-wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,0 C 200,40 400,40 600,20 C 800,0 1000,0 1200,20 L1200,40 L0,40 Z" fill="#F3F5F1"></path>
+  </svg>
 </div>
 
 <div class="wrap">
 
   <div class="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-blob2"></div>
     <div class="hero-eyebrow">UNIT CASEMIX &amp; VERIFIKASI BPJS</div>
     <h1>Alat bantu dokumentasi klinis dan pengelolaan klaim.</h1>
     <p>Kumpulan sistem internal untuk membantu dokter, DPJP, dan koder memastikan diagnosis terdokumentasi lengkap dan sesuai pedoman resmi — sejak sebelum berkas diverifikasi BPJS.</p>
+    <svg class="hero-wave" viewBox="0 0 1200 44" preserveAspectRatio="none">
+      <path d="M0,20 C 250,44 450,0 700,16 C 900,28 1050,10 1200,22 L1200,44 L0,44 Z" fill="rgba(255,255,255,0.10)"></path>
+    </svg>
   </div>
 
   <div class="section-label">Fitur Tersedia</div>
