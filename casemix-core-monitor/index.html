@@ -66,6 +66,13 @@
   .summary-card .lbl{font-size:.85rem; color:var(--ink-muted); margin-top:4px;}
 
   table{width:100%; border-collapse:collapse; background:var(--surface); border-radius:16px; overflow:hidden; box-shadow:0 3px 10px rgba(19,44,58,.06);}
+  .dpjp-group{margin-bottom:22px;}
+  .dpjp-header{display:flex; align-items:center; justify-content:space-between; padding:10px 4px; flex-wrap:wrap; gap:8px;}
+  .dpjp-name{font-family:'Source Serif 4',serif; font-weight:600; font-size:1.1rem; color:var(--navy);}
+  .dpjp-stats{display:flex; gap:8px;}
+  .mini-badge{font-size:.75rem; font-weight:600; padding:3px 10px; border-radius:999px;}
+  .mini-badge.danger{background:var(--red-bg); color:var(--red);}
+  .mini-badge.ok{background:var(--ok-bg); color:var(--ok);}
   th{background:var(--navy); color:#fff; text-align:left; padding:12px 14px; font-size:.82rem; text-transform:uppercase; letter-spacing:.04em;}
   td{padding:12px 14px; border-bottom:1px solid var(--rule-soft); font-size:.92rem; vertical-align:top;}
   tr:last-child td{border-bottom:none;}
@@ -209,30 +216,61 @@ ${JSON.stringify(diag.sampleRow2FirstFewCells)}
     return;
   }
 
-  let rows = data.map(d => {
-    const badgeClass = d.status === 'MELEBIHI_PLAFON' ? 'danger' : (d.status === 'AMAN' ? 'ok' : 'unknown');
-    const badgeText = d.status === 'MELEBIHI_PLAFON' ? '⚠ Melebihi' : (d.status === 'AMAN' ? '✓ Aman' : 'Belum ada plafon');
-    const rowClass = d.status === 'MELEBIHI_PLAFON' ? 'row-danger' : '';
-    const plafonTampil = d.konfirmasiPlafonFmt !== '-' ? d.konfirmasiPlafonFmt : d.estimasiPlafonFmt;
-    return `<tr class="${rowClass}">
-      <td>${esc(d.tanggalMasuk)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.episodeId)}</span></td>
-      <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)} • Bangsal ${esc(d.bangsal)}</span></td>
-      <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
-      <td>${esc(d.dpjp)}</td>
-      <td>${esc(plafonTampil)}</td>
-      <td>${esc(d.tarifRiilFmt)}</td>
-      <td>${esc(d.selisihFmt)}</td>
-      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
-    </tr>`;
+  // Kelompokkan berdasarkan DPJP
+  const grouped = {};
+  data.forEach(d => {
+    const key = d.dpjp || '(DPJP tidak diketahui)';
+    if(!grouped[key]) grouped[key] = [];
+    grouped[key].push(d);
+  });
+
+  // urutkan DPJP: yang punya episode MELEBIHI_PLAFON terbanyak duluan
+  const dpjpNames = Object.keys(grouped).sort((a,b) => {
+    const melA = grouped[a].filter(d=>d.status==='MELEBIHI_PLAFON').length;
+    const melB = grouped[b].filter(d=>d.status==='MELEBIHI_PLAFON').length;
+    return melB - melA;
+  });
+
+  let sectionsHtml = dpjpNames.map(dpjpName => {
+    const items = grouped[dpjpName];
+    const melDpjp = items.filter(d=>d.status==='MELEBIHI_PLAFON').length;
+    const amanDpjp = items.filter(d=>d.status==='AMAN').length;
+
+    let rows = items.map(d => {
+      const badgeClass = d.status === 'MELEBIHI_PLAFON' ? 'danger' : (d.status === 'AMAN' ? 'ok' : 'unknown');
+      const badgeText = d.status === 'MELEBIHI_PLAFON' ? '⚠ Melebihi' : (d.status === 'AMAN' ? '✓ Aman' : 'Belum ada plafon');
+      const rowClass = d.status === 'MELEBIHI_PLAFON' ? 'row-danger' : '';
+      const plafonTampil = d.konfirmasiPlafonFmt !== '-' ? d.konfirmasiPlafonFmt : d.estimasiPlafonFmt;
+      return `<tr class="${rowClass}">
+        <td>${esc(d.tanggalMasuk)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.episodeId)}</span></td>
+        <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)} • Bangsal ${esc(d.bangsal)}</span></td>
+        <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
+        <td>${esc(plafonTampil)}</td>
+        <td>${esc(d.tarifRiilFmt)}</td>
+        <td>${esc(d.selisihFmt)}</td>
+        <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+      </tr>`;
+    }).join('');
+
+    return `<div class="dpjp-group">
+      <div class="dpjp-header">
+        <span class="dpjp-name">👤 ${esc(dpjpName)}</span>
+        <span class="dpjp-stats">
+          ${melDpjp > 0 ? `<span class="mini-badge danger">${melDpjp} melebihi</span>` : ''}
+          ${amanDpjp > 0 ? `<span class="mini-badge ok">${amanDpjp} aman</span>` : ''}
+        </span>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Tgl Masuk / Episode</th><th>Pasien</th><th>Diagnosis</th>
+          <th>Plafon</th><th>Tarif Riil</th><th>Selisih</th><th>Status</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
   }).join('');
 
-  tableArea.innerHTML = `<table>
-    <thead><tr>
-      <th>Tgl Masuk / Episode</th><th>Pasien</th><th>Diagnosis</th><th>DPJP</th>
-      <th>Plafon</th><th>Tarif Riil</th><th>Selisih</th><th>Status</th>
-    </tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
+  tableArea.innerHTML = sectionsHtml;
 }
 </script>
 </body>
