@@ -1183,25 +1183,35 @@ const DOC_GUIDES = [
   ],
   catatan:"Pastikan hasil GDS terdokumentasi jelas SEBELUM dan SESUDAH koreksi untuk mendukung diagnosis dan tindakan yang diberikan."
 },
-{ id:"traumakepala", nama:"Trauma Kepala Ringan", kode:"S06.0",
-  keywords:["trauma kepala","cedera kepala","benturan kepala"],
+{ id:"traumakepala", nama:"Cedera Otak Traumatik (Trauma Kepala)", kode:"S06",
+  keywords:["trauma kepala","cedera kepala","benturan kepala","cedera otak traumatik","cot"],
+  sumber:"PNPK Kemenkes RI No. HK.01.07/MENKES/1600/2022",
   anamnesis:[
-    "Mekanisme cedera (jatuh, kecelakaan, benturan benda)",
-    "Ada tidaknya kehilangan kesadaran dan durasinya",
-    "Muntah setelah cedera, nyeri kepala hebat",
-    "Riwayat kejang setelah cedera",
-    "Penggunaan obat pengencer darah"
+    "Ada/tidaknya benturan kepala langsung, waktu kejadian (berapa jam/hari sebelum ke RS)",
+    "Mekanisme trauma: kecelakaan lalu lintas (kecepatan, penggunaan helm/sabuk pengaman), jatuh dari ketinggian (berapa meter), atau kekerasan lain (KDRT, dikeroyok, trauma olahraga)",
+    "Penurunan kesadaran, nyeri kepala, muntah, kejang, disorientasi",
+    "Amnesia pasca trauma — bisa ceritakan urutan kejadian sebelum/sesudah trauma (amnesia antero/retrograde)?",
+    "AMPLE: Alergi, Medikasi rutin, Penyakit terdahulu, makan terakhir (Last meal)",
+    "LUCID INTERVAL — periode sadar sesaat lalu kesadaran menurun kembali dalam &lt;24 jam — khas pada Hematoma Epidural, JANGAN dianggap membaik",
+    "Riwayat penggunaan alkohol/narkoba sebelum kejadian"
   ],
   pemeriksaanFisik:[
-    "GCS (Glasgow Coma Scale)",
-    "Pemeriksaan pupil (ukuran dan refleks cahaya)",
-    "Tanda fraktur basis kranii (battle sign, racoon eyes, otorrhea/rhinorrhea)",
-    "Pemeriksaan luka kepala/wajah"
+    "Primary survey: Airway-Breathing-Circulation, tanda vital (TD, nadi, RR, suhu)",
+    "Skala Koma Glasgow (SKG) — WAJIB untuk klasifikasi: RINGAN (SKG 13-15), SEDANG (SKG 9-12), BERAT (SKG ≤8)",
+    "Status generalis: identifikasi seluruh luka (lokasi, ukuran, kondisi), cedera di organ lain",
+    "Status neurologis: pupil (bentuk/ukuran/isokor-anisokor/refleks cahaya), nervi kranialis I-XII, tanda rangsang meningeal (JIKA servikal sudah dipastikan aman), motorik, sensorik (bila SKG 15), refleks fisiologis/patologis",
+    "Tanda Cushing (curiga peningkatan TIK): hipertensi &gt;130/90, bradikardia &lt;60x/menit, bradipneu &lt;16x/menit",
+    "Tanda fraktur basis kranii: battle sign, brill hematoma (racoon eyes), otorea, rhinorea"
   ],
   penunjang:[
-    "CT-Scan kepala — bila ada faktor risiko (GCS turun, muntah proyektil, kejang, penggunaan antikoagulan, usia lanjut, dll); tidak rutin untuk trauma kepala ringan tanpa faktor risiko",
-    "Darah lengkap dan koagulasi — bila pasien pakai obat pengencer darah atau cedera signifikan"
-  ]},
+    "CT scan kepala (brain dan bone window) — INDIKASI (level A, WAJIB dilakukan bila memenuhi salah satu): SKG&lt;15 belum pulih dalam 2-6 jam pasca trauma; ATAU SKG 15 DISERTAI salah satu dari: muntah &gt;2 episode, usia &gt;60 tahun, defisit neurologis, fraktur tulang kepala, tanda fraktur basis kranii, sakit kepala dominan, koagulopati, kejang pasca trauma, pingsan &gt;30 menit, gangguan memori jangka pendek, riwayat alkohol/obat-obatan, konsumsi antikoagulan, atau mekanisme kejadian berbahaya",
+    "Foto Rontgen kepala (Schedel) AP-lateral dan foto servikal AP-lateral — pemeriksaan rutin",
+    "Darah lengkap, hemostasis (PT/APTT/fibrinogen), AGD (bila penurunan kesadaran), GDS, HbA1c, elektrolit (Na/K/Cl), fungsi ginjal (ureum/kreatinin), fungsi hati (ALT/AST), CRP, osmolalitas darah (bila curiga edema serebri)",
+    "CT scan ulang — bila terjadi penurunan SKG ≥2 poin (curiga perluasan perdarahan, terutama EDH yang bisa membesar hingga 36 jam onset)",
+    "MRI kepala — lebih sensitif untuk Diffuse Axonal Injury (DAI), TIDAK disarankan pada fase akut trauma kepala"
+  ],
+  catatan:"Indikasi bedah (contoh EDH): volume &gt;30cc ATAU ketebalan &gt;15mm ATAU midline shift &gt;5mm (tanpa melihat SKG); ATAU SKG&lt;9 dengan anisokor pupil — golden period pembedahan &lt;4 jam. Kriteria rawat jalan: SKG 15, dapat beraktivitas mandiri/bantuan minimal, skor TOAG&gt;75. Pemasangan collar neck servikal WAJIB sampai cedera servikal disingkirkan radiologis. Level of evidence PNPK ini memakai skala Oxford (IA-IV) dengan derajat rekomendasi A-D."
+},
 { id:"vulnus", nama:"Vulnus / Luka Robek (Laserasi)", kode:"S01/S81/S91",
   keywords:["vulnus","luka robek","laserasi","luka terbuka"],
   anamnesis:[
