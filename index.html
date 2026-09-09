@@ -12,7 +12,7 @@
 <style>
   :root{
     --bg:#F3F5F1; --surface:#FFFFFF; --ink:#1E2A2A; --ink-muted:#5B6B6B;
-    --navy:#132C3A; --navy-2:#1B4257; --teal:#2D8C82; --teal-soft:#E1EFED;
+    --navy:#132C3A; --navy-2:#1B4257; --blue:#2E6DA4; --blue-soft:#E3EDF6;
     --rule:#D7DED6; --rule-soft:#E8ECE5;
     --ok:#2D6A4F; --ok-bg:#E5F1EA;
   }
@@ -31,7 +31,7 @@
   .wrap{max-width:880px; margin:0 auto; padding:0 24px 70px;}
 
   .hero{position:relative; margin:28px 0 46px; padding:40px 36px 56px; border-radius:28px; color:#fff; overflow:hidden;
-        background:linear-gradient(135deg, var(--navy), var(--teal));
+        background:linear-gradient(135deg, var(--navy), var(--blue));
         box-shadow:0 8px 24px rgba(19,44,58,.18);}
   .hero-blob{position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,.08); pointer-events:none;}
   .hero-blob2{position:absolute; bottom:-90px; right:80px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.06); pointer-events:none;}
@@ -44,22 +44,21 @@
   .grid{display:grid; grid-template-columns:1fr; gap:18px;}
   @media(min-width:660px){ .grid{grid-template-columns:1fr 1fr;} }
 
-  a.card-link{ text-decoration:none; color:inherit; display:block; }
   .card{background:var(--surface); border:1px solid var(--rule); border-radius:18px; padding:26px 24px; height:100%; position:relative;
         box-shadow:0 3px 10px rgba(19,44,58,.06); transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
-  a.card-link:hover .card{ transform:translateY(-6px); box-shadow:0 16px 30px rgba(19,44,58,.16); border-color:var(--teal); }
+  .clickable-card:hover{ transform:translateY(-6px); box-shadow:0 16px 30px rgba(19,44,58,.16); border-color:var(--blue); }
+  .clickable-card:hover .icon-badge{ transform:scale(1.12); }
   .card.disabled{opacity:.6;}
-  a.card-link:hover .card.disabled{ transform:none; box-shadow:0 3px 10px rgba(19,44,58,.06); border-color:var(--rule); }
 
   .icon-badge{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:16px; transition:transform .22s ease;}
-  a.card-link:hover .icon-badge{ transform:scale(1.12); }
-  .icon-badge.teal{background:var(--teal-soft);}
+  .icon-badge.blue{background:var(--blue-soft);}
   .icon-badge.grey{background:var(--rule-soft);}
 
   .card-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:1.15rem; color:var(--navy); margin-bottom:8px;}
   .card-desc{font-size:.86rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;}
-  .pill{display:inline-block; font-size:.78rem; font-weight:600; padding:7px 18px; border-radius:999px; border:1.5px solid var(--teal); color:var(--teal);}
-  .pill.grey{border-color:var(--rule); color:var(--ink-muted);}
+  .pill{display:inline-block; font-size:.78rem; font-weight:600; padding:7px 18px; border-radius:999px; border:1.5px solid var(--blue); color:var(--blue); text-decoration:none; cursor:pointer; transition:background .18s ease, color .18s ease;}
+  .pill:hover{background:var(--blue); color:#fff;}
+  .pill.grey{border-color:var(--rule); color:var(--ink-muted); cursor:default;}
   .badge-status{position:absolute; top:20px; right:20px; font-size:.62rem; font-weight:700; padding:3px 10px; border-radius:999px; letter-spacing:.3px;}
   .badge-status.live{background:var(--ok-bg); color:var(--ok);}
   .badge-status.soon{background:var(--rule-soft); color:var(--ink-muted);}
@@ -100,15 +99,13 @@
   <div class="section-label">Fitur Tersedia</div>
   <div class="grid">
 
-    <a class="card-link" href="panduan-dokumentasi/">
-      <div class="card">
-        <span class="badge-status live">Aktif</span>
-        <div class="icon-badge teal">📋</div>
-        <div class="card-title">Panduan Dokumentasi Klinis</div>
-        <div class="card-desc">Cek pola diagnosis yang sering dispute BPJS dan panduan anamnesis, pemeriksaan fisik, serta penunjang sesuai PNPK/PPK — untuk dokter dan koder.</div>
-        <span class="pill">Buka Panduan →</span>
-      </div>
-    </a>
+    <div class="card clickable-card">
+      <span class="badge-status live">Aktif</span>
+      <div class="icon-badge blue">📋</div>
+      <div class="card-title">Panduan Dokumentasi Klinis</div>
+      <div class="card-desc">Cek pola diagnosis yang sering dispute BPJS dan panduan anamnesis, pemeriksaan fisik, serta penunjang sesuai PNPK/PPK — untuk dokter dan koder.</div>
+      <a class="pill" href="panduan-dokumentasi/">Buka Panduan →</a>
+    </div>
 
     <div class="card disabled">
       <span class="badge-status soon">Segera</span>
