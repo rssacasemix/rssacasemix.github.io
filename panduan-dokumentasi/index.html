@@ -22,18 +22,18 @@
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.5;}
   .wrap{max-width:780px; margin:0 auto; padding:28px 20px 80px;}
   h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; font-weight:600; margin:0;}
-  h1{font-size:1.5rem; color:var(--primary); letter-spacing:.2px;}
-  .sub{color:var(--ink-muted); font-size:.92rem; margin-top:4px;}
+  h1{font-size:2rem; color:var(--primary); letter-spacing:.2px;}
+  .sub{color:var(--ink-muted); font-size:1.05rem; margin-top:6px;}
   header.top{border-bottom:2px solid var(--primary); padding-bottom:16px; margin-bottom:24px;}
   nav.tabs{display:flex; gap:6px; margin-bottom:22px;}
   nav.tabs button{flex:1; padding:10px 8px; border:1px solid var(--rule); background:var(--surface); color:var(--ink-muted); font-family:inherit; font-size:.88rem; cursor:pointer; border-radius:999px;}
   nav.tabs button.active{background:var(--primary); color:#fff; border-color:var(--primary);}
   section.card{background:var(--surface); border:1px solid var(--rule); border-radius:16px; padding:22px; margin-bottom:18px; box-shadow:0 3px 10px rgba(19,58,75,.05);}
-  .step-label{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--primary); font-weight:600; margin-bottom:10px;}
+  .step-label{font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--primary); font-weight:600; margin-bottom:10px;}
   label.field{display:block; margin-bottom:14px;}
-  label.field span{display:block; font-size:.85rem; color:var(--ink-muted); margin-bottom:4px;}
+  label.field span{display:block; font-size:.95rem; color:var(--ink-muted); margin-bottom:4px;}
   input[type=text], input[type=date], input[type=datetime-local], select, textarea{
-    width:100%; padding:9px 10px; border:1px solid var(--rule); border-radius:3px; font-family:inherit; font-size:.95rem; background:#fff; color:var(--ink);
+    width:100%; padding:10px 12px; border:1px solid var(--rule); border-radius:3px; font-family:inherit; font-size:1.05rem; background:#fff; color:var(--ink);
   }
   textarea{resize:vertical; min-height:64px;}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 16px;}
@@ -44,7 +44,7 @@
   .checklist-item:last-child{border-bottom:none;}
   .checklist-item input{margin-top:3px; width:16px; height:16px; flex-shrink:0;}
   .checklist-item.flag{background:var(--red-bg); margin:0 -12px; padding:10px 12px; border-radius:3px; border-bottom:none;}
-  .checklist-item .txt{font-size:.93rem;}
+  .checklist-item .txt{font-size:1.02rem;}
   .checklist-item .flag-tag{font-size:.7rem; color:var(--red); font-weight:600; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:2px;}
   .suggestion{margin-top:16px; padding:14px 16px; border-radius:4px; font-size:.93rem;}
   .suggestion.OK{background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok);}
@@ -57,9 +57,9 @@
   .final-decision label.sel-OK{border-color:var(--ok); background:var(--ok-bg);}
   .final-decision label.sel-Re-Code{border-color:var(--yellow); background:var(--yellow-bg);}
   .final-decision label.sel-Hold{border-color:var(--red); background:var(--red-bg);}
-  button.primary{background:var(--primary); color:#fff; border:none; padding:11px 22px; border-radius:999px; font-family:inherit; font-size:.95rem; cursor:pointer; font-weight:500; transition:transform .15s ease, box-shadow .15s ease;}
+  button.primary{background:var(--primary); color:#fff; border:none; padding:12px 24px; border-radius:999px; font-family:inherit; font-size:1.02rem; cursor:pointer; font-weight:500; transition:transform .15s ease, box-shadow .15s ease;}
   button.primary:hover{transform:translateY(-1px); box-shadow:0 6px 14px rgba(19,58,75,.25);}
-  button.ghost{background:transparent; color:var(--primary); border:1.5px solid var(--primary); padding:9.5px 20px; border-radius:999px; font-family:inherit; font-size:.9rem; cursor:pointer; transition:background .15s ease;}
+  button.ghost{background:transparent; color:var(--primary); border:1.5px solid var(--primary); padding:10.5px 20px; border-radius:999px; font-family:inherit; font-size:.98rem; cursor:pointer; transition:background .15s ease;}
   button.ghost:hover{background:var(--primary-soft);}
   button.small-add{background:var(--primary); color:#fff; border:none; padding:0 16px; border-radius:999px; font-family:inherit; font-size:.85rem; cursor:pointer; white-space:nowrap;}
   .row-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
@@ -77,7 +77,7 @@
   .summary-box .num{font-family:'Source Serif 4',serif; font-size:1.8rem; font-weight:700;}
   .summary-box.OK .num{color:var(--ok);} .summary-box.Re-Code .num{color:var(--yellow);} .summary-box.Hold .num{color:var(--red);}
   .summary-box .lbl{font-size:.75rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:.04em;}
-  .note{font-size:.8rem; color:var(--ink-muted); margin-top:20px; border-top:1px solid var(--rule); padding-top:14px;}
+  .note{font-size:.9rem; color:var(--ink-muted); margin-top:20px; border-top:1px solid var(--rule); padding-top:14px;}
   .warn-box{font-size:.8rem; color:var(--yellow); background:var(--yellow-bg); border:1px solid var(--yellow); border-radius:4px; padding:10px 12px; margin-bottom:16px;}
   #printArea{display:none;}
   @media print{
