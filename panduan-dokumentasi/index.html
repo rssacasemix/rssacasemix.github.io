@@ -454,7 +454,7 @@ const CASES = [
 { group:"Obstetri", id:"htkehamilan", nama:"Hipertensi dalam Kehamilan (O10–O14)",
   kode:"O10-O14", codeType:"ICD-10",
   keywords:["hipertensi kehamilan","preeklampsia","pe","hdk"],
-  kriteria:"O10 untuk hipertensi yang sudah ada SEBELUM kehamilan; O13/O14 untuk hipertensi yang timbul SELAMA kehamilan disertai proteinuria. Riwayat sebelum-hamil harus jelas untuk memilih kode yang tepat.",
+  kriteria:"O10 untuk hipertensi yang sudah ada SEBELUM kehamilan; O13/O14 untuk hipertensi yang timbul SELAMA kehamilan disertai proteinuria. Riwayat sebelum-hamil harus jelas untuk memilih kode yang tepat. Catatan konteks klinis (PNPK Kemenkes No. 701/2026): secara klinis PE sebenarnya bisa ditegakkan tanpa proteinuria bila ada bukti keterlibatan organ lain — namun secara praktik verifikasi BPJS di RS ini, proteinuria tetap jadi bukti pendukung utama yang diminta, jadi tetap upayakan ada sebelum klaim diajukan.",
   required:[
     {id:"htk1", label:"Riwayat tekanan darah SEBELUM kehamilan terdokumentasi jelas (ada riwayat HT atau tidak)"},
     {id:"htk2", label:"Bila timbul selama kehamilan: ada hasil pemeriksaan proteinuria yang mendukung"}
@@ -537,7 +537,7 @@ const CASES = [
 { group:"Infeksi Berat & Sepsis", id:"leptospirosis", nama:"Leptospirosis (A27._)",
   kode:"A27._", codeType:"ICD-10",
   keywords:["leptospirosis","lepto"],
-  kriteria:"Leptospirosis wajib dikonfirmasi dengan hasil serologi IgM/IgG POSITIF. Bila negatif, diagnosis harus dihapus.",
+  kriteria:"Leptospirosis wajib dikonfirmasi dengan hasil serologi IgM/IgG POSITIF. Bila negatif, diagnosis harus dihapus. Catatan konteks klinis (Pedoman Diagnosis Laboratoris Leptospirosis, Balai Litbangkes Kemenkes): secara klinis serologi negatif di fase awal (hari 1-7) sebenarnya belum tentu menyingkirkan diagnosis karena proses seroconversion butuh waktu — pertimbangkan px ulang bila klinis masih sangat mengarah — namun untuk keperluan klaim BPJS, bukti serologi/konfirmasi lab POSITIF tetap yang diminta.",
   required:[
     {id:"lepto1", label:"Hasil pemeriksaan serologi IgM/IgG Leptospira POSITIF"}
   ],
