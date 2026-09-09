@@ -144,7 +144,7 @@ async function cobaMasuk(){
     }
     document.getElementById('gateArea').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-    renderData(json.data || []);
+    renderData(json.data || [], json._diag);
   }catch(err){
     errEl.textContent = 'Gagal menghubungi server: ' + err;
     errEl.style.display = 'block';
@@ -156,7 +156,7 @@ function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function renderData(data){
+function renderData(data, diag){
   const melebihi = data.filter(d => d.status === 'MELEBIHI_PLAFON');
   const aman = data.filter(d => d.status === 'AMAN');
   document.getElementById('numMelebihi').textContent = melebihi.length;
@@ -164,7 +164,25 @@ function renderData(data){
 
   const tableArea = document.getElementById('tableArea');
   if(!data.length){
-    tableArea.innerHTML = '<div class="empty">Belum ada data episode dengan tarif riil terisi.</div>';
+    let diagHtml = '';
+    if(diag){
+      diagHtml = `<div style="text-align:left; max-width:700px; margin:20px auto; background:#fff3f3; border:1px solid #e0b4b4; border-radius:8px; padding:16px; font-size:.85rem; font-family:monospace; white-space:pre-wrap; overflow-x:auto;">
+<strong>Info diagnostik (kirim screenshot ini ke Claude):</strong>
+
+Total baris data di sheet: ${diag.totalRowsInSheet}
+Index kolom TARIF RIIL: ${diag.colTarifRiilIndex}
+Index kolom ESTIMASI PLAFON: ${diag.colEstimasiPlafonIndex}
+Index kolom KONFIRMASI PLAFON: ${diag.colKonfirmasiPlafonIndex}
+Contoh nilai TARIF RIIL baris ke-2: ${JSON.stringify(diag.sampleTarifRiilRaw)}
+
+Header yang terbaca sistem:
+${diag.headersFound.map((h,i)=>i+': "'+h+'"').join('\\n')}
+
+Contoh 10 sel pertama baris ke-2:
+${JSON.stringify(diag.sampleRow2FirstFewCells)}
+      </div>`;
+    }
+    tableArea.innerHTML = '<div class="empty">Belum ada data episode dengan tarif riil terisi.</div>' + diagHtml;
     return;
   }
 
