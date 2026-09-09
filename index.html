@@ -1900,10 +1900,20 @@ function addEntry(fieldKey, text, matchedCase){
   pushEntry(fieldKey, entry);
 }
 
+function resetChecklistState(){
+  // Dipanggil setiap kali ada diagnosis/tindakan yang dihapus, supaya kartu checklist
+  // yang mungkin sedang tampil (dari 'Mulai Review Checklist' sebelumnya) tidak nyangkut
+  // menampilkan data lama untuk entry yang sudah dihapus.
+  reviewQueue = [];
+  reviewIndex = 0;
+  currentReviewEntry = null;
+  const cc = document.getElementById('checklistCard');
+  if(cc) cc.style.display = 'none';
+}
 function renderFieldLists(){
-  document.getElementById('listPrimer').innerHTML = entryPrimer ? entryChip(entryPrimer, ()=>{ entryPrimer=null; renderFieldLists(); renderRingkasan(); }) : '';
-  document.getElementById('listSekunder').innerHTML = entriesSekunder.map((e,i)=>entryChip(e, ()=>{ entriesSekunder.splice(i,1); renderFieldLists(); renderRingkasan(); })).join('');
-  document.getElementById('listTindakan').innerHTML = entriesTindakan.map((e,i)=>entryChip(e, ()=>{ entriesTindakan.splice(i,1); renderFieldLists(); renderRingkasan(); })).join('');
+  document.getElementById('listPrimer').innerHTML = entryPrimer ? entryChip(entryPrimer, ()=>{ entryPrimer=null; resetChecklistState(); renderFieldLists(); renderRingkasan(); }) : '';
+  document.getElementById('listSekunder').innerHTML = entriesSekunder.map((e,i)=>entryChip(e, ()=>{ entriesSekunder.splice(i,1); resetChecklistState(); renderFieldLists(); renderRingkasan(); })).join('');
+  document.getElementById('listTindakan').innerHTML = entriesTindakan.map((e,i)=>entryChip(e, ()=>{ entriesTindakan.splice(i,1); resetChecklistState(); renderFieldLists(); renderRingkasan(); })).join('');
   // rebind remove buttons
   document.querySelectorAll('.entry-item button.remove').forEach(btn=>{
     btn.onclick = window['__remove_'+btn.dataset.rid];
