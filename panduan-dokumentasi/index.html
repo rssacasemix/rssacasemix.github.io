@@ -106,14 +106,15 @@
   .entry-item button.remove{background:none; border:1px solid var(--rule); color:var(--red); border-radius:50%; width:26px; height:26px; cursor:pointer; font-size:.9rem; flex-shrink:0;}
   .entry-item button.review{background:var(--primary); color:#fff; border:none; border-radius:999px; padding:4px 12px; font-size:.78rem; cursor:pointer; flex-shrink:0;}
 
-  .masthead{background:var(--primary); color:#fff;}
-  .masthead-inner{max-width:780px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; gap:14px;}
+  .masthead{background:#132C3A; color:#fff; position:relative;}
+  .masthead-inner{max-width:780px; margin:0 auto; padding:20px 20px 34px; display:flex; align-items:center; gap:14px;}
   .masthead img{height:52px; width:auto; display:block; opacity:.95;}
   .masthead-text{display:flex; flex-direction:column; gap:0; flex:1;}
-  .masthead-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:.9rem;}
-  .masthead-sub{font-size:.66rem; color:#AFC0C8; text-transform:uppercase; letter-spacing:1px;}
-  .masthead-back{color:#D9E4E8; font-size:.78rem; text-decoration:none; border:1px solid rgba(255,255,255,.3); border-radius:3px; padding:5px 10px; flex-shrink:0;}
-  .masthead-back:hover{background:rgba(255,255,255,.1);}
+  .masthead-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:1.2rem;}
+  .masthead-sub{font-size:.8rem; color:#AFC0C8; text-transform:uppercase; letter-spacing:1.2px;}
+  .masthead-back{color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; border:1.5px solid rgba(255,255,255,.5); border-radius:999px; padding:8px 16px; flex-shrink:0; transition:background .18s ease, transform .18s ease;}
+  .masthead-back:hover{background:#2E6DA4; border-color:#2E6DA4; transform:translateY(-2px);}
+  .masthead-wave{display:block; width:100%; height:26px; margin-top:-1px; position:relative;}
 </style>
 </head>
 <body>
@@ -127,6 +128,9 @@
     </div>
     <a class="masthead-back" href="../">← Dashboard</a>
   </div>
+  <svg class="masthead-wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,0 C 200,40 400,40 600,20 C 800,0 1000,0 1200,20 L1200,40 L0,40 Z" fill="#F3F5F1"></path>
+  </svg>
 </div>
 
 <div class="wrap">
