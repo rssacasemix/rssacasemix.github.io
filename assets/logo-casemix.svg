@@ -1,0 +1,23 @@
+<svg width="380" height="260" viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Logo Casemix RSUD Saras Adyatma</title>
+<defs>
+<clipPath id="shieldClip">
+<path d="M60 8 L100 8 L100 62 C100 92 82 112 60 122 C38 112 20 92 20 62 L20 8 Z"/>
+</clipPath>
+</defs>
+<g transform="translate(90,20)">
+<path d="M60 8 L100 8 L100 62 C100 92 82 112 60 122 C38 112 20 92 20 62 L20 8 Z" fill="#132C3A"/>
+<g clip-path="url(#shieldClip)">
+<rect x="32" y="70" width="12" height="35" fill="#2D8C82"/>
+<rect x="50" y="55" width="12" height="50" fill="#2D8C82"/>
+<rect x="68" y="40" width="12" height="65" fill="#3AA69A"/>
+<rect x="86" y="60" width="12" height="45" fill="#2D8C82"/>
+<path d="M18 58 L44 58 L52 46 L60 66 L68 52 L102 52" fill="none" stroke="#F3F5F1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M60 8 L100 8 L100 62 C100 92 82 112 60 122 C38 112 20 92 20 62 L20 8 Z" fill="none" stroke="#0D2029" stroke-width="1.5"/>
+</g>
+<text x="190" y="168" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#132C3A" letter-spacing="1">CASEMIX</text>
+<text x="190" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-weight="500" font-size="13" fill="#5B6B6B" letter-spacing="2">RSUD SARAS ADYATMA</text>
+<line x1="130" y1="204" x2="250" y2="204" stroke="#D7DED6" stroke-width="1"/>
+<text x="190" y="222" text-anchor="middle" font-family="Arial, sans-serif" font-weight="400" font-size="10.5" fill="#8B9494" letter-spacing="1.5">UNIT CASEMIX &amp; VERIFIKASI BPJS</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg width="120" height="130" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Ikon Casemix RSUD Saras Adyatma</title>
+<defs>
+<clipPath id="shieldClipIconLight">
+<path d="M60 4 L104 4 L104 62 C104 94 84 115 60 126 C36 115 16 94 16 62 L16 4 Z"/>
+</clipPath>
+</defs>
+<path d="M60 4 L104 4 L104 62 C104 94 84 115 60 126 C36 115 16 94 16 62 L16 4 Z" fill="#F3F5F1"/>
+<g clip-path="url(#shieldClipIconLight)">
+<rect x="30" y="68" width="13" height="38" fill="#2D8C82"/>
+<rect x="49" y="52" width="13" height="54" fill="#2D8C82"/>
+<rect x="68" y="36" width="13" height="70" fill="#1B5A54"/>
+<rect x="87" y="58" width="13" height="48" fill="#2D8C82"/>
+<path d="M14 56 L46 56 L55 42 L64 65 L73 50 L106 50" fill="none" stroke="#132C3A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M60 4 L104 4 L104 62 C104 94 84 115 60 126 C36 115 16 94 16 62 L16 4 Z" fill="none" stroke="#132C3A" stroke-width="1.2"/>
+</svg>
