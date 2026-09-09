@@ -95,7 +95,7 @@
 
   <div id="dashboard">
     <h1 class="page-title">Casemix Core Monitor</h1>
-    <div class="sub">Pemantauan estimasi plafon INA-CBG vs tarif riil rumah sakit per episode pasien — untuk deteksi dini risiko selisih biaya sebelum klaim diajukan.</div>
+    <div class="sub">Pemantauan estimasi plafon INA-CBG vs tarif riil rumah sakit per episode pasien yang <strong>masih aktif rawat inap</strong> (belum BLPL/APS/rujuk/meninggal) — untuk deteksi dini risiko selisih biaya sebelum klaim diajukan.</div>
 
     <div class="summary-row" style="margin-top:24px;">
       <div class="summary-card danger">
@@ -182,7 +182,7 @@ Contoh 10 sel pertama baris ke-2:
 ${JSON.stringify(diag.sampleRow2FirstFewCells)}
       </div>`;
     }
-    tableArea.innerHTML = '<div class="empty">Belum ada data episode dengan tarif riil terisi.</div>' + diagHtml;
+    tableArea.innerHTML = '<div class="empty">Belum ada episode aktif (masih rawat inap) dengan tarif riil terisi.</div>' + diagHtml;
     return;
   }
 
