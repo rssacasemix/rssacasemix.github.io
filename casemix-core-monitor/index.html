@@ -80,7 +80,7 @@
   tbody tr:hover{background:var(--blue-soft) !important; transform:scale(1.005);}
   .row-danger{background:var(--red-bg);}
   .row-danger:hover{background:#F2D4D1 !important;}
-  .badge{display:inline-block; padding:3px 10px; border-radius:999px; font-size:.75rem; font-weight:600;}
+  .badge{display:inline-block; padding:3px 10px; border-radius:999px; font-size:.75rem; font-weight:600; white-space:nowrap;}
   .badge.danger{background:var(--red); color:#fff;}
   .badge.ok{background:var(--ok); color:#fff;}
   .badge.unknown{background:var(--rule); color:var(--ink-muted);}
@@ -243,12 +243,12 @@ ${JSON.stringify(diag.sampleRow2FirstFewCells)}
       const plafonTampil = d.konfirmasiPlafonFmt !== '-' ? d.konfirmasiPlafonFmt : d.estimasiPlafonFmt;
       return `<tr class="${rowClass}">
         <td>${esc(d.tanggalMasuk)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.episodeId)}</span></td>
-        <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)} • Bangsal ${esc(d.bangsal)}</span></td>
+        <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)}</span><br><span style="color:var(--ink-muted);font-size:.8rem;">Bangsal ${esc(d.bangsal)}</span></td>
         <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
         <td style="white-space:nowrap;">${esc(plafonTampil)}</td>
         <td style="white-space:nowrap;">${esc(d.tarifRiilFmt)}</td>
         <td style="white-space:nowrap;">${esc(d.selisihFmt)}</td>
-        <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+        <td style="white-space:nowrap;"><span class="badge ${badgeClass}">${badgeText}</span></td>
       </tr>`;
     }).join('');
 
