@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casemix Core Monitor — RSUD Saras Adyatma</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F5F1; --surface:#FFFFFF; --ink:#1E2A2A; --ink-muted:#5B6B6B;
+    --navy:#132C3A; --blue:#2E6DA4; --blue-soft:#E3EDF6;
+    --rule:#D7DED6; --rule-soft:#E8ECE5;
+    --ok:#2D6A4F; --ok-bg:#E5F1EA;
+    --red:#9C3B34; --red-bg:#F7E6E4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.55;}
+  h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; margin:0;}
+
+  .masthead{background:var(--navy); color:#fff; position:relative;}
+  .masthead-inner{max-width:960px; margin:0 auto; padding:22px 24px 40px; display:flex; align-items:center; gap:16px;}
+  .masthead img{height:72px; width:auto; display:block;}
+  .masthead-text{display:flex; flex-direction:column; gap:1px; flex:1;}
+  .masthead-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:1.2rem;}
+  .masthead-sub{font-size:.8rem; color:#AFC6CC; text-transform:uppercase; letter-spacing:1.2px;}
+  .masthead-back{color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; border:1.5px solid rgba(255,255,255,.5); border-radius:999px; padding:8px 16px; flex-shrink:0; transition:background .18s ease, transform .18s ease;}
+  .masthead-back:hover{background:var(--blue); border-color:var(--blue); transform:translateY(-2px);}
+  .masthead-wave{display:block; width:100%; height:26px; margin-top:-1px;}
+
+  .wrap{max-width:960px; margin:0 auto; padding:28px 20px 80px;}
+  h1.page-title{font-size:2rem; color:var(--navy);}
+  .sub{color:var(--ink-muted); font-size:1.05rem; margin-top:6px;}
+
+  .gate{max-width:420px; margin:60px auto; background:var(--surface); border:1px solid var(--rule); border-radius:18px; padding:32px 28px; box-shadow:0 3px 10px rgba(19,44,58,.06); text-align:center;}
+  .gate h2{font-size:1.3rem; color:var(--navy); margin-bottom:8px;}
+  .gate p{color:var(--ink-muted); font-size:.95rem; margin-bottom:20px;}
+  .gate input{width:100%; padding:12px 14px; border:1px solid var(--rule); border-radius:8px; font-size:1.05rem; margin-bottom:14px; font-family:inherit;}
+  .gate button{width:100%; background:var(--blue); color:#fff; border:none; padding:12px; border-radius:999px; font-size:1rem; font-weight:600; cursor:pointer; font-family:inherit; transition:transform .15s ease;}
+  .gate button:hover{transform:translateY(-2px);}
+  .gate .err{color:var(--red); font-size:.9rem; margin-top:10px; display:none;}
+
+  #dashboard{display:none;}
+  .summary-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;}
+  @media(min-width:600px){ .summary-row{grid-template-columns:1fr 1fr;} }
+  .summary-card{background:var(--surface); border:1px solid var(--rule); border-radius:16px; padding:20px; text-align:center;}
+  .summary-card .num{font-family:'Source Serif 4',serif; font-weight:700; font-size:2.2rem;}
+  .summary-card.danger .num{color:var(--red);}
+  .summary-card.ok .num{color:var(--ok);}
+  .summary-card .lbl{font-size:.85rem; color:var(--ink-muted); margin-top:4px;}
+
+  table{width:100%; border-collapse:collapse; background:var(--surface); border-radius:16px; overflow:hidden; box-shadow:0 3px 10px rgba(19,44,58,.06);}
+  th{background:var(--navy); color:#fff; text-align:left; padding:12px 14px; font-size:.82rem; text-transform:uppercase; letter-spacing:.04em;}
+  td{padding:12px 14px; border-bottom:1px solid var(--rule-soft); font-size:.92rem; vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .row-danger{background:var(--red-bg);}
+  .badge{display:inline-block; padding:3px 10px; border-radius:999px; font-size:.75rem; font-weight:600;}
+  .badge.danger{background:var(--red); color:#fff;}
+  .badge.ok{background:var(--ok); color:#fff;}
+  .badge.unknown{background:var(--rule); color:var(--ink-muted);}
+  .table-scroll{overflow-x:auto;}
+  .loading, .empty{text-align:center; color:var(--ink-muted); padding:40px 0;}
+
+  footer{margin-top:44px; padding-top:20px; border-top:1px solid var(--rule); font-size:.92rem; color:var(--ink-muted); text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <img src="../assets/logo-icon-light.svg" alt="Casemix RSUD Saras Adyatma">
+    <div class="masthead-text">
+      <div class="masthead-title">RSUD Saras Adyatma</div>
+      <div class="masthead-sub">Sistem Casemix</div>
+    </div>
+    <a class="masthead-back" href="../">← Dashboard</a>
+  </div>
+  <svg class="masthead-wave" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,0 C 200,40 400,40 600,20 C 800,0 1000,0 1200,20 L1200,40 L0,40 Z" fill="#F3F5F1"></path>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <div id="gateArea" class="gate">
+    <h2>🔒 Casemix Core Monitor</h2>
+    <p>Halaman ini berisi data pasien — masukkan password akses untuk melanjutkan.</p>
+    <input type="password" id="passInput" placeholder="Password akses">
+    <button id="btnMasuk">Masuk</button>
+    <div class="err" id="errMsg">Password salah. Coba lagi.</div>
+  </div>
+
+  <div id="dashboard">
+    <h1 class="page-title">Casemix Core Monitor</h1>
+    <div class="sub">Pemantauan estimasi plafon INA-CBG vs tarif riil rumah sakit per episode pasien — untuk deteksi dini risiko selisih biaya sebelum klaim diajukan.</div>
+
+    <div class="summary-row" style="margin-top:24px;">
+      <div class="summary-card danger">
+        <div class="num" id="numMelebihi">-</div>
+        <div class="lbl">Episode Melebihi Plafon</div>
+      </div>
+      <div class="summary-card ok">
+        <div class="num" id="numAman">-</div>
+        <div class="lbl">Episode Aman</div>
+      </div>
+    </div>
+
+    <div id="tableArea" class="table-scroll">
+      <div class="loading">Memuat data...</div>
+    </div>
+  </div>
+
+  <footer>© 2026 dr. Nurul Khafidz Subekti, AIFO-K. Seluruh hak cipta dilindungi. Data pasien pada halaman ini bersifat rahasia dan hanya untuk keperluan internal RSUD Saras Adyatma.</footer>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyc-5pbDPzlyRfSVhFqvZT_WpKcSP16CoHL2iqU2q6RXMq7pfV7AI3zbShsj4DjxVd5/exec";
+
+document.getElementById('btnMasuk').addEventListener('click', cobaMasuk);
+document.getElementById('passInput').addEventListener('keydown', e => { if(e.key==='Enter') cobaMasuk(); });
+
+async function cobaMasuk(){
+  const pass = document.getElementById('passInput').value;
+  const errEl = document.getElementById('errMsg');
+  errEl.style.display = 'none';
+
+  if(APPS_SCRIPT_URL.includes('GANTI_DENGAN')){
+    alert('Backend belum disetel. Lihat komentar APPS_SCRIPT_URL di bagian atas kode.');
+    return;
+  }
+
+  document.getElementById('btnMasuk').textContent = 'Memeriksa...';
+  try{
+    const res = await fetch(APPS_SCRIPT_URL + '?pass=' + encodeURIComponent(pass));
+    const json = await res.json();
+    if(json.error){
+      errEl.textContent = json.error === 'Password salah atau belum diset.' ? 'Password salah. Coba lagi.' : json.error;
+      errEl.style.display = 'block';
+      document.getElementById('btnMasuk').textContent = 'Masuk';
+      return;
+    }
+    document.getElementById('gateArea').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderData(json.data || []);
+  }catch(err){
+    errEl.textContent = 'Gagal menghubungi server: ' + err;
+    errEl.style.display = 'block';
+    document.getElementById('btnMasuk').textContent = 'Masuk';
+  }
+}
+
+function esc(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderData(data){
+  const melebihi = data.filter(d => d.status === 'MELEBIHI_PLAFON');
+  const aman = data.filter(d => d.status === 'AMAN');
+  document.getElementById('numMelebihi').textContent = melebihi.length;
+  document.getElementById('numAman').textContent = aman.length;
+
+  const tableArea = document.getElementById('tableArea');
+  if(!data.length){
+    tableArea.innerHTML = '<div class="empty">Belum ada data episode dengan tarif riil terisi.</div>';
+    return;
+  }
+
+  let rows = data.map(d => {
+    const badgeClass = d.status === 'MELEBIHI_PLAFON' ? 'danger' : (d.status === 'AMAN' ? 'ok' : 'unknown');
+    const badgeText = d.status === 'MELEBIHI_PLAFON' ? '⚠ Melebihi' : (d.status === 'AMAN' ? '✓ Aman' : 'Belum ada plafon');
+    const rowClass = d.status === 'MELEBIHI_PLAFON' ? 'row-danger' : '';
+    const plafonTampil = d.konfirmasiPlafonFmt !== '-' ? d.konfirmasiPlafonFmt : d.estimasiPlafonFmt;
+    return `<tr class="${rowClass}">
+      <td>${esc(d.tanggalMasuk)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.episodeId)}</span></td>
+      <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)} • Bangsal ${esc(d.bangsal)}</span></td>
+      <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
+      <td>${esc(d.dpjp)}</td>
+      <td>${esc(plafonTampil)}</td>
+      <td>${esc(d.tarifRiilFmt)}</td>
+      <td>${esc(d.selisihFmt)}</td>
+      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+    </tr>`;
+  }).join('');
+
+  tableArea.innerHTML = `<table>
+    <thead><tr>
+      <th>Tgl Masuk / Episode</th><th>Pasien</th><th>Diagnosis</th><th>DPJP</th>
+      <th>Plafon</th><th>Tarif Riil</th><th>Selisih</th><th>Status</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+</script>
+</body>
+</html>
