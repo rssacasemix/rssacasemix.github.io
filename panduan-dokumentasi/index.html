@@ -22,8 +22,8 @@
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.5;}
   .wrap{max-width:780px; margin:0 auto; padding:28px 20px 80px;}
   h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; font-weight:600; margin:0;}
-  h1{font-size:2rem; color:var(--primary); letter-spacing:.2px;}
-  .sub{color:var(--ink-muted); font-size:1.05rem; margin-top:6px;}
+  h1{font-size:2.3rem; color:var(--primary); letter-spacing:.2px;}
+  .sub{color:var(--ink-muted); font-size:1.15rem; margin-top:6px;}
   header.top{border-bottom:2px solid var(--primary); padding-bottom:16px; margin-bottom:24px;}
   header.hero-box{position:relative; overflow:hidden; border:none; padding:32px 28px 44px; margin-bottom:28px; border-radius:22px; color:#fff;
     background:linear-gradient(135deg, #132C3A, #2E6DA4); box-shadow:0 8px 24px rgba(19,44,58,.18);}
@@ -2224,8 +2224,8 @@ function renderCombinedDocGuide(matchedList){
   const list = arr => arr.map(x=>`<li>${x}</li>`).join('');
   const sections = matchedList.map(m=>`
     <div style="margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed var(--rule);">
-      <div style="font-weight:600; margin-bottom:2px;">${m.slot==='Primer'?'Diagnosis Primer':m.slot==='Sekunder'?'Diagnosis Sekunder':'Tindakan'} — ${m.guide.nama}</div>
-      <div style="font-size:.72rem; margin-bottom:6px; ${m.guide.sumber ? 'color:var(--ok);font-weight:600;' : 'color:var(--ink-muted);'}">${m.guide.sumber ? '✓ Sumber: '+m.guide.sumber : '⚠ Sumber: pengetahuan medis umum (belum dari PPK RS)'}</div>
+      <div style="font-weight:600; margin-bottom:2px; font-size:1.05rem;">${m.slot==='Primer'?'Diagnosis Primer':m.slot==='Sekunder'?'Diagnosis Sekunder':'Tindakan'} — ${m.guide.nama}</div>
+      <div style="font-size:.88rem; margin-bottom:6px; ${m.guide.sumber ? 'color:var(--ok);font-weight:600;' : 'color:var(--ink-muted);'}">${m.guide.sumber ? '✓ Sumber: '+m.guide.sumber : '⚠ Sumber: pengetahuan medis umum (belum dari PPK RS)'}</div>
       <strong>Anamnesis:</strong><ul style="margin:4px 0 8px 18px; padding:0;">${list(m.guide.anamnesis)}</ul>
       <strong>Pemeriksaan Fisik:</strong><ul style="margin:4px 0 8px 18px; padding:0;">${list(m.guide.pemeriksaanFisik)}</ul>
       <strong>Pemeriksaan Penunjang:</strong><ul style="margin:4px 0 8px 18px; padding:0;">${list(m.guide.penunjang)}</ul>
@@ -2233,8 +2233,8 @@ function renderCombinedDocGuide(matchedList){
     </div>`).join('');
   return `
     <button type="button" class="primary" style="margin-top:6px;" onclick="document.getElementById('${gid}').style.display = document.getElementById('${gid}').style.display==='none' ? 'block':'none';">📋 Lihat Panduan Dokumentasi Gabungan (${matchedList.length} diagnosis)</button>
-    <div id="${gid}" style="display:none; margin-top:10px; padding:14px; background:var(--primary-soft); border-radius:4px; font-size:.85rem;">
-      <div style="margin-bottom:10px; color:var(--ink-muted); font-size:.75rem;">Panduan umum berdasarkan pedoman klinis standar, digabung dari semua diagnosis/tindakan pada episode ini — SPO/PPK rumah sakit tetap menjadi acuan utama bila berbeda.</div>
+    <div id="${gid}" style="display:none; margin-top:10px; padding:14px; background:var(--primary-soft); border-radius:4px; font-size:1rem; line-height:1.55;">
+      <div style="margin-bottom:10px; color:var(--ink-muted); font-size:.88rem;">Panduan umum berdasarkan pedoman klinis standar, digabung dari semua diagnosis/tindakan pada episode ini — SPO/PPK rumah sakit tetap menjadi acuan utama bila berbeda.</div>
       ${sections}
     </div>`;
 }
@@ -2254,7 +2254,7 @@ function renderRingkasan(){
     if(!bySlot[slot].length) return;
     html += `<div class="slot-group"><h4>${slot==='Primer'?'Diagnosis Primer':slot==='Sekunder'?'Diagnosis Sekunder':'Tindakan (ICD-9-CM)'}</h4>`;
     bySlot[slot].forEach(e=>{
-      const flagTxt = e.matchedCase ? '<span style="color:var(--red);font-size:.78rem;font-weight:600;">⚠ WARNING — Sering Dispute, perlu checklist</span>' : '<span style="color:var(--ok);font-size:.78rem;">✓ Normal — tidak masuk daftar sering dispute</span>';
+      const flagTxt = e.matchedCase ? '<span style="color:var(--red);font-size:.92rem;font-weight:600;">⚠ WARNING — Sering Dispute, perlu checklist</span>' : '<span style="color:var(--ok);font-size:.92rem;">✓ Normal — tidak masuk daftar sering dispute</span>';
       const guide = findDocGuide(e);
       if(guide) matchedGuides.push({slot, entryText:e.text, guide});
       html += `<div class="entry-item"><div class="ei-main">${e.text}</div>${flagTxt}</div>`;
