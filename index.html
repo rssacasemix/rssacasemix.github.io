@@ -1902,13 +1902,16 @@ function addEntry(fieldKey, text, matchedCase){
 
 function resetChecklistState(){
   // Dipanggil setiap kali ada diagnosis/tindakan yang dihapus, supaya kartu checklist
-  // yang mungkin sedang tampil (dari 'Mulai Review Checklist' sebelumnya) tidak nyangkut
-  // menampilkan data lama untuk entry yang sudah dihapus.
+  // dan kartu status/lanjut yang mungkin sedang tampil (dari 'Mulai Review Checklist'
+  // sebelumnya) tidak nyangkut menampilkan data lama untuk entry yang sudah dihapus.
   reviewQueue = [];
   reviewIndex = 0;
   currentReviewEntry = null;
+  currentSuggestion = null;
   const cc = document.getElementById('checklistCard');
   if(cc) cc.style.display = 'none';
+  const mc = document.getElementById('masukanCard');
+  if(mc) mc.style.display = 'none';
 }
 function renderFieldLists(){
   document.getElementById('listPrimer').innerHTML = entryPrimer ? entryChip(entryPrimer, ()=>{ entryPrimer=null; resetChecklistState(); renderFieldLists(); renderRingkasan(); }) : '';
