@@ -875,23 +875,27 @@ const DOC_GUIDES = [
 },
 { id:"dispepsia", nama:"Dispepsia", kode:"K30",
   keywords:["dispepsia","maag","nyeri ulu hati","gerd"],
+  sumber:"Konsensus Nasional Penatalaksanaan Dispepsia dan Infeksi H. pylori di Indonesia, PB PGI & KSHPI (Revisi 2021) — bukan PNPK Kemenkes",
   anamnesis:[
-    "Lokasi dan karakter nyeri (ulu hati, terbakar, kembung)",
-    "Hubungan dengan makan (sebelum/sesudah makan)",
-    "Durasi dan frekuensi keluhan",
-    "Gejala alarm: penurunan berat badan, muntah darah, BAB hitam, sulit menelan",
-    "Riwayat konsumsi NSAID/obat lain, riwayat merokok/alkohol"
+    "Karakter keluhan: nyeri/rasa tidak nyaman ulu hati, rasa terbakar, kembung, cepat kenyang (early satiety), rasa penuh setelah makan, mual, sendawa",
+    "Untuk dispepsia FUNGSIONAL: keluhan berlangsung minimal 3 bulan terakhir dengan awitan gejala sejak 6 bulan sebelum diagnosis ditegakkan (kriteria Roma III)",
+    "TANDA BAHAYA (alarm symptoms) — WAJIB digali karena menentukan perlu tidaknya endoskopi segera: penurunan berat badan tidak direncanakan, disfagia progresif, muntah rekuren/persisten, perdarahan saluran cerna (hematemesis/melena), anemia, demam, teraba massa abdomen atas, riwayat keluarga kanker lambung, ATAU dispepsia awitan baru pada usia &gt;45-55 tahun",
+    "Riwayat konsumsi OAINS/NSAID dan obat lain, riwayat merokok/alkohol, riwayat infeksi H. pylori sebelumnya"
   ],
   pemeriksaanFisik:[
-    "Nyeri tekan epigastrium",
+    "Nyeri tekan epigastrium — temuan paling sering",
+    "Tanda lain: distensi perut, perkusi hipersonor, bising usus meningkat",
     "Tanda anemia (konjungtiva pucat) bila dicurigai perdarahan kronis",
-    "Tanda alarm lain: massa abdomen, penurunan berat badan terlihat"
+    "Tanda alarm lain saat pemeriksaan: massa abdomen teraba, tanda peritonitis"
   ],
   penunjang:[
+    "Endoskopi (EGD) — WAJIB SEGERA bila ada tanda bahaya (bukan terapi empiris dulu); TIDAK rutin untuk dispepsia tanpa tanda bahaya pada usia muda",
+    "Tes H. pylori — endoskopik (rapid urease test, histologi, kultur, PCR) atau non-endoskopik (urea breath test = gold standard, stool antigen test, serologi); WAJIB bebas antibiotik dan PPI minimal 2 minggu sebelum tes",
     "Darah lengkap — terutama bila dicurigai anemia/perdarahan",
-    "Endoskopi (EGD) — bila ada gejala alarm atau tidak respon terapi awal (bukan rutin untuk dispepsia fungsional ringan)"
+    "USG abdomen — bila dicurigai diagnosis banding kolesistitis/kolelitiasis",
+    "Laboratorium fungsi hati, amilase/lipase — bila dicurigai diagnosis banding pankreatitis/kelainan hepatobilier"
   ],
-  catatan:"Cek juga kasus dispute Gastritis (perlu endoskopi untuk memastikan) bila diagnosis mengarah ke gastritis dengan komplikasi."
+  catatan:"Dispepsia dengan tanda bahaya TIDAK diberi terapi empiris — harus endoskopi dulu (dengan/tanpa histopatologi) sebelum ditangani. Dispepsia ORGANIK (ditemukan lesi mukosa saat endoskopi: gastritis, gastritis hemoragik, duodenitis, ulkus gaster/duodenum, keganasan) ditata laksana sesuai kelainan yang ditemukan. Dispepsia FUNGSIONAL (endoskopi tanpa kerusakan mukosa) ditata laksana sesuai gangguan fungsional yang dominan. Lihat juga panduan Gastritis untuk detail diagnosis organik tersering."
 },
 { id:"vertigo", nama:"Vertigo", kode:"R42",
   keywords:["vertigo","pusing berputar"],
@@ -1258,22 +1262,25 @@ const DOC_GUIDES = [
 },
 { id:"gastritisguide", nama:"Gastritis", kode:"K29",
   keywords:["gastritis","radang lambung","maag akut"],
+  sumber:"Konsensus Nasional Penatalaksanaan Dispepsia dan Infeksi H. pylori di Indonesia, PB PGI & KSHPI (Revisi 2021) — bukan PNPK Kemenkes",
   anamnesis:[
-    "Nyeri ulu hati, mual, muntah",
-    "Riwayat konsumsi NSAID/aspirin/alkohol",
-    "Ada tidaknya tanda perdarahan: muntah darah, BAB hitam",
-    "Durasi dan frekuensi keluhan"
+    "Nyeri ulu hati, mual, muntah — gastritis termasuk kelompok DISPEPSIA ORGANIK (ditemukan lesi mukosa saat endoskopi), berbeda dari dispepsia fungsional",
+    "Riwayat konsumsi OAINS/aspirin/alkohol — penyebab tersering gastritis erosif",
+    "Ada tidaknya tanda perdarahan: muntah darah (hematemesis), BAB hitam (melena) — curiga gastritis hemoragik",
+    "TANDA BAHAYA yang mengharuskan endoskopi segera (bukan terapi empiris): penurunan berat badan, disfagia progresif, muntah persisten, perdarahan, anemia, demam, massa abdomen, usia awitan baru &gt;45-55 tahun",
+    "Riwayat infeksi H. pylori sebelumnya atau faktor risiko (higienitas, riwayat keluarga)"
   ],
   pemeriksaanFisik:[
     "Nyeri tekan epigastrium",
-    "Tanda anemia (konjungtiva pucat) bila dicurigai perdarahan",
-    "Tanda syok bila perdarahan masif (jarang)"
+    "Tanda anemia (konjungtiva pucat) bila dicurigai perdarahan kronis akibat gastritis erosif",
+    "Tanda syok bila perdarahan masif (jarang, tapi waspada pada gastritis hemoragik luas)"
   ],
   penunjang:[
-    "Darah lengkap — terutama bila dicurigai perdarahan",
-    "Endoskopi (EGD) — untuk konfirmasi diagnosis gastritis, terutama bila ada tanda alarm atau tidak respons terapi"
+    "Endoskopi (EGD) DENGAN atau TANPA histopatologi — DIAGNOSIS PASTI gastritis WAJIB ditegakkan lewat endoskopi (melihat lesi mukosa), bukan hanya dari gejala klinis semata",
+    "Tes H. pylori — rapid urease test/histologi saat endoskopi, atau urea breath test/stool antigen test bila tanpa endoskopi (harus bebas antibiotik & PPI 2 minggu sebelumnya)",
+    "Darah lengkap — terutama bila dicurigai perdarahan/anemia"
   ],
-  catatan:"Tanpa endoskopi, diagnosis Gastritis sebaiknya dipertimbangkan kode gejala (mis. R10.1 nyeri epigastrium) sesuai bukti yang ada — cek juga kasus dispute terkait Gastritis tanpa endoskopi."
+  catatan:"Tanpa hasil endoskopi yang mengonfirmasi lesi mukosa, diagnosis Gastritis sebaiknya dipertimbangkan sebagai kode gejala (mis. R10.1 nyeri epigastrium/K30 Dispepsia) sesuai bukti yang tersedia — endoskopi adalah dasar pembeda dispepsia organik (gastritis, ulkus) dari dispepsia fungsional. Terapi ulkus peptikum/gastritis erosif: kombinasi PPI (mis. rabeprazole 2x20mg) dengan mukoprotektor (mis. rebamipide 3x100mg); bila H. pylori positif, terapi eradikasi (triple therapy PPI+2 antibiotik)."
 },
 { id:"ileusobstruktif", nama:"Ileus Obstruktif", kode:"K56",
   keywords:["ileus","obstruksi usus","perut kembung tidak bab"],
