@@ -245,9 +245,9 @@ ${JSON.stringify(diag.sampleRow2FirstFewCells)}
         <td>${esc(d.tanggalMasuk)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.episodeId)}</span></td>
         <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)} • Bangsal ${esc(d.bangsal)}</span></td>
         <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
-        <td>${esc(plafonTampil)}</td>
-        <td>${esc(d.tarifRiilFmt)}</td>
-        <td>${esc(d.selisihFmt)}</td>
+        <td style="white-space:nowrap;">${esc(plafonTampil)}</td>
+        <td style="white-space:nowrap;">${esc(d.tarifRiilFmt)}</td>
+        <td style="white-space:nowrap;">${esc(d.selisihFmt)}</td>
         <td><span class="badge ${badgeClass}">${badgeText}</span></td>
       </tr>`;
     }).join('');
