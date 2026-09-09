@@ -100,9 +100,30 @@
   .entry-item .ei-main{flex:1; font-size:.9rem;}
   .entry-item button.remove{background:none; border:1px solid var(--rule); color:var(--red); border-radius:3px; width:26px; height:26px; cursor:pointer; font-size:.9rem; flex-shrink:0;}
   .entry-item button.review{background:var(--primary); color:#fff; border:none; border-radius:3px; padding:4px 10px; font-size:.78rem; cursor:pointer; flex-shrink:0;}
+
+  .masthead{background:var(--primary); color:#fff;}
+  .masthead-inner{max-width:780px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:12px;}
+  .masthead img{height:32px; width:auto; display:block; filter:brightness(0) invert(1); opacity:.95;}
+  .masthead-text{display:flex; flex-direction:column; gap:0; flex:1;}
+  .masthead-title{font-family:'Source Serif 4', Georgia, serif; font-weight:600; font-size:.9rem;}
+  .masthead-sub{font-size:.66rem; color:#AFC0C8; text-transform:uppercase; letter-spacing:1px;}
+  .masthead-back{color:#D9E4E8; font-size:.78rem; text-decoration:none; border:1px solid rgba(255,255,255,.3); border-radius:3px; padding:5px 10px; flex-shrink:0;}
+  .masthead-back:hover{background:rgba(255,255,255,.1);}
 </style>
 </head>
 <body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <img src="https://rssa.bantulkab.go.id/assets/Site/img/logo-font-white.png" alt="RSUD Saras Adyatma" onerror="this.style.display='none'">
+    <div class="masthead-text">
+      <div class="masthead-title">RSUD Saras Adyatma</div>
+      <div class="masthead-sub">Sistem Casemix</div>
+    </div>
+    <a class="masthead-back" href="../">← Dashboard</a>
+  </div>
+</div>
+
 <div class="wrap">
 
   <header class="top">
