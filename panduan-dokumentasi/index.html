@@ -1429,24 +1429,30 @@ const DOC_GUIDES = [
   ],
   catatan:"Kode ICD-10 harus sesuai derajat berdasarkan kriteria objektif, bukan asal ketik 'malnutrisi' umum: E44.1 (ringan), E44.0 (sedang), E43 (berat tanpa spesifikasi), E41 (marasmus), E40 (kwashiorkor), E42 (marasmik-kwashiorkor), E46 (tidak spesifik). Pasien dengan skor risiko tinggi pada skrining awal harus dirujuk ke Tim Terapi Gizi (TTG) rumah sakit."
 },
-{ id:"frakturguide", nama:"Fraktur Tertutup", kode:"S42/S52/S72/S82",
+{ id:"frakturguide", nama:"Fraktur (Terbuka/Tertutup)", kode:"S42/S52/S72/S82",
   keywords:["fraktur","patah tulang"],
+  sumber:"PNPK Kemenkes RI No. HK.01.07/MENKES/270/2019",
   anamnesis:[
-    "Mekanisme cedera (jatuh, kecelakaan, benturan)",
-    "Lokasi nyeri dan ketidakmampuan menggerakkan bagian tubuh terkait",
-    "Waktu kejadian",
-    "Riwayat penyakit tulang sebelumnya (osteoporosis, keganasan) bila fraktur terjadi dengan trauma ringan"
+    "Mekanisme cedera secara detail, diikuti ketidakmampuan menggunakan tungkai/bagian tubuh yang cedera",
+    "Nyeri, kebiruan, bengkak (gejala umum akibat cedera jaringan lunak penyerta)",
+    "Gejala penyerta yang WAJIB ditanyakan (curiga cedera multipel/organ lain): rasa baal, pucat/sianosis kulit, darah di urin, nyeri perut, kesulitan bernapas, atau riwayat hilang kesadaran",
+    "Riwayat cedera sebelumnya atau abnormalitas muskuloskeletal — penting untuk kecurigaan fraktur patologis (trauma minimal tapi terjadi fraktur) pada penyakit tulang mendasar (osteoporosis, tumor tulang, dll)",
+    "Riwayat penyakit untuk persiapan anestesi dan operasi bila diperlukan tindakan"
   ],
   pemeriksaanFisik:[
-    "Deformitas, bengkak, nyeri tekan pada lokasi cedera",
-    "Pemeriksaan neurovaskular distal (nadi, sensasi, pergerakan) — penting untuk menyingkirkan komplikasi",
-    "Luka terbuka di sekitar lokasi fraktur (menentukan fraktur terbuka/tertutup)"
+    "Prinsip pemeriksaan muskuloskeletal LOOK-FEEL-MOVE, dilakukan menyeluruh dan bilateral",
+    "LOOK: bengkak, memar, deformitas yang terlihat; PENTING — pastikan kulit intak/tidak untuk menentukan fraktur TERBUKA vs TERTUTUP",
+    "FEEL: palpasi area cedera cari titik nyeri/perlunakan (beberapa fraktur terlewat bila tidak diperiksa detail, mis. fraktur skafoid di anatomical snuff box); evaluasi vaskularisasi dan kecurigaan gangguan saraf",
+    "MOVE: cari krepitasi dan pergerakan abnormal; tanyakan pasien apakah dapat menggerakkan sendi yang lebih distal dari cedera",
+    "Pemeriksaan pelvis dan spine WAJIB pada cedera energi tinggi (high energy injury)"
   ],
   penunjang:[
-    "Foto rontgen lokasi cedera (minimal 2 proyeksi) — konfirmasi fraktur dan derajat pergeseran",
-    "Darah lengkap — sebagai persiapan bila akan dilakukan tindakan operatif"
+    "Foto polos (sinar-X) — modalitas WAJIB pertama, mengikuti prinsip 'RULE OF TWO': (1) TWO VIEW — minimal 2 proyeksi tegak lurus (AP+lateral), fraktur bisa tidak terlihat hanya 1 film; (2) TWO JOINTS — foto mencakup sendi di atas DAN di bawah lokasi fraktur; (3) TWO LIMBS — pada anak, foto kedua sisi bisa dibandingkan bila lempeng epifisis membingungkan; (4) TWO INJURIES — waspada cedera lebih dari satu level pada trauma energi tinggi; (5) TWO OCCASIONS — ulangi foto 2-3 minggu kemudian bila awal meragukan (fraktur samar/occult, umum pada klavikula, skafoid, leher femur); (6) TWO EXAMINATION — lanjut CT/MRI/USG/bone scintigraphy bila foto polos meragukan",
+    "CT scan — untuk fraktur ringan/tersembunyi (occult), dan tulang berbentuk kompleks dengan superimposisi di foto polos (vertebra, wajah, pelvis, ujung tulang panjang)",
+    "MRI — SANGAT SENSITIF mendeteksi edema sumsum tulang di sekitar garis fraktur (occult fracture/fraktur stres tanpa fraktur kortikal), serta kerusakan kartilago sendi/jaringan lunak (tendon, ligamen)",
+    "Bone scintigraphy — sensitif tapi TIDAK SPESIFIK (hasil positif bisa berarti fraktur, infeksi, tumor, atau kelainan sendi — butuh konfirmasi foto polos/CT)"
   ],
-  catatan:"Bila dilakukan fiksasi internal, pastikan laporan operasi menyebutkan jelas dengan/tanpa reduksi — lihat kasus dispute 'Fiksasi Fraktur: Dengan vs Tanpa Reduksi'."
+  catatan:"Klasifikasi TERBUKA vs TERTUTUP menentukan kegawatdaruratan: fraktur TERBUKA (ada hubungan dengan lingkungan luar via defek jaringan lunak) adalah kegawatdaruratan — klasifikasi Gustilo-Anderson (I/II/IIIA/IIIB/IIIC) menentukan risiko infeksi (0-2% s/d 25-50%) dan tata laksana (irigasi-debridemen WAJIB dalam 8 jam ekstremitas bawah, antibiotik profilaksis, evaluasi tetanus). Prinsip resusitasi awal tetap ABC (airway-breathing-circulation) sebelum penanganan definitif fraktur. Bila dilakukan fiksasi internal, pastikan laporan operasi menyebutkan jelas dengan/tanpa reduksi — lihat kasus dispute 'Fiksasi Fraktur: Dengan vs Tanpa Reduksi'."
 },
 { id:"sesaknapas", nama:"Sesak Napas / Dyspnoea (Gejala)", kode:"R06.0",
   keywords:["sesak napas","dyspnoea","sesak nafas"],
