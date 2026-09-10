@@ -246,7 +246,7 @@ ${JSON.stringify(diag.sampleRow2FirstFewCells)}
         <td>${esc(d.namaPasien)}<br><span style="color:var(--ink-muted);font-size:.8rem;">RM ${esc(d.noRm)}</span><br><span style="color:var(--ink-muted);font-size:.8rem;">Bangsal ${esc(d.bangsal)}</span></td>
         <td>${esc(d.diagnosis)}<br><span style="color:var(--ink-muted);font-size:.8rem;">${esc(d.icd10)}</span></td>
         <td style="white-space:nowrap;">${esc(plafonTampil)}</td>
-        <td style="white-space:nowrap;">${esc(d.tarifRiilFmt)}</td>
+        <td style="white-space:nowrap;">${esc(d.tarifRiilFmt)}<br><span style="color:var(--ink-muted);font-size:.75rem;font-weight:400;">update: ${esc(d.tanggalUpdateFmt)}</span></td>
         <td style="white-space:nowrap;">${esc(d.selisihFmt)}</td>
         <td style="white-space:nowrap;"><span class="badge ${badgeClass}">${badgeText}</span></td>
       </tr>`;
