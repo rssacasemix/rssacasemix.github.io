@@ -127,7 +127,9 @@
       </svg>
     </div>
 
-    <div class="summary-row" style="margin-top:24px;">
+    <div id="waktuAkses" style="text-align:right; color:var(--ink-muted); font-size:.85rem; margin-bottom:12px;"></div>
+
+    <div class="summary-row" style="margin-top:0;">
       <div class="summary-card danger">
         <div class="num" id="numMelebihi">-</div>
         <div class="lbl">Episode Melebihi Plafon</div>
@@ -187,6 +189,13 @@ function esc(s){
 }
 
 function renderData(data, diag){
+  const now = new Date();
+  const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis',"Jumat",'Sabtu'];
+  const bulanList = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const jamStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('waktuAkses').textContent =
+    `Data per: ${hariList[now.getDay()]}, ${now.getDate()} ${bulanList[now.getMonth()]} ${now.getFullYear()} — ${jamStr} WIB`;
+
   const melebihi = data.filter(d => d.status === 'MELEBIHI_PLAFON');
   const aman = data.filter(d => d.status === 'AMAN');
   document.getElementById('numMelebihi').textContent = melebihi.length;
