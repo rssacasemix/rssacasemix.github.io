@@ -9,6 +9,7 @@
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root{
     --bg:#F3F5F1; --surface:#FFFFFF; --ink:#1E2A2A; --ink-muted:#5B6B6B;
@@ -54,6 +55,11 @@
 
   .summary-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;}
   @media(min-width:600px){ .summary-row{grid-template-columns:1fr 1fr;} }
+  .section-label{font-size:.82rem; text-transform:uppercase; letter-spacing:1px; color:var(--ink-muted); font-weight:600; margin:8px 0 14px;}
+  .chart-grid{display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:28px;}
+  @media(min-width:800px){ .chart-grid{grid-template-columns:1fr 1fr;} }
+  .chart-card{background:var(--surface); border:1px solid var(--rule); border-radius:16px; padding:20px; box-shadow:0 3px 10px rgba(19,44,58,.06);}
+  .chart-title{font-family:'Source Serif 4',serif; font-weight:600; font-size:1rem; color:var(--navy); margin-bottom:14px;}
   .summary-card{background:var(--surface); border:1px solid var(--rule); border-radius:16px; padding:20px; text-align:center; cursor:default;
     transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
   .summary-card:hover{transform:translateY(-6px); box-shadow:0 16px 30px rgba(19,44,58,.14);}
@@ -140,6 +146,20 @@
       </div>
     </div>
 
+    <div id="chartArea" style="display:none;">
+      <div class="section-label">Pola per Bangsal</div>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="chart-title">Jumlah Episode Melebihi Plafon per Bangsal</div>
+          <canvas id="chartJumlah"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Total Selisih Kerugian per Bangsal (Rp)</div>
+          <canvas id="chartKerugian"></canvas>
+        </div>
+      </div>
+    </div>
+
     <div id="tableArea" class="table-scroll">
       <div class="loading">Memuat data...</div>
     </div>
@@ -188,6 +208,76 @@ function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+let chartJumlahInstance = null;
+let chartKerugianInstance = null;
+
+function renderCharts(data){
+  if(!data.length || typeof Chart === 'undefined'){
+    document.getElementById('chartArea').style.display = 'none';
+    return;
+  }
+  document.getElementById('chartArea').style.display = 'block';
+
+  // Agregasi per bangsal
+  const perBangsal = {};
+  data.forEach(d => {
+    const key = d.bangsal || '(Tidak diketahui)';
+    if(!perBangsal[key]) perBangsal[key] = { melebihi:0, aman:0, totalKerugian:0 };
+    if(d.status === 'MELEBIHI_PLAFON'){
+      perBangsal[key].melebihi++;
+      const nilai = typeof d.selisih === 'number' ? d.selisih : parseFloat(String(d.selisihFmt).replace(/[^0-9-]/g,''));
+      if(!isNaN(nilai) && nilai < 0) perBangsal[key].totalKerugian += Math.abs(nilai);
+    } else if(d.status === 'AMAN'){
+      perBangsal[key].aman++;
+    }
+  });
+
+  // urutkan bangsal berdasar jumlah melebihi terbanyak
+  const labels = Object.keys(perBangsal).sort((a,b) => perBangsal[b].melebihi - perBangsal[a].melebihi);
+  const dataMelebihi = labels.map(l => perBangsal[l].melebihi);
+  const dataAman = labels.map(l => perBangsal[l].aman);
+  const dataKerugian = labels.map(l => perBangsal[l].totalKerugian);
+
+  if(chartJumlahInstance) chartJumlahInstance.destroy();
+  if(chartKerugianInstance) chartKerugianInstance.destroy();
+
+  const ctx1 = document.getElementById('chartJumlah').getContext('2d');
+  chartJumlahInstance = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Melebihi Plafon', data: dataMelebihi, backgroundColor: '#9C3B34' },
+        { label: 'Aman', data: dataAman, backgroundColor: '#2D6A4F' }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { family: 'IBM Plex Sans' } } } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    }
+  });
+
+  const ctx2 = document.getElementById('chartKerugian').getContext('2d');
+  chartKerugianInstance = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Total Selisih Kerugian (Rp)', data: dataKerugian, backgroundColor: '#2E6DA4' }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (ctx) => 'Rp' + ctx.parsed.y.toLocaleString('id-ID') } }
+      },
+      scales: { y: { beginAtZero: true, ticks: { callback: (val) => 'Rp' + val.toLocaleString('id-ID') } } }
+    }
+  });
+}
+
 function renderData(data, diag){
   const now = new Date();
   const hariList = ['Minggu','Senin','Selasa','Rabu','Kamis',"Jumat",'Sabtu'];
@@ -200,6 +290,8 @@ function renderData(data, diag){
   const aman = data.filter(d => d.status === 'AMAN');
   document.getElementById('numMelebihi').textContent = melebihi.length;
   document.getElementById('numAman').textContent = aman.length;
+
+  renderCharts(data);
 
   const tableArea = document.getElementById('tableArea');
   if(!data.length){
