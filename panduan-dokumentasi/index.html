@@ -2518,7 +2518,10 @@ function renderRingkasan(){
   const masukanCard = document.getElementById('masukanGlobalCard');
   if(!all.length){ card.style.display='none'; masukanCard.style.display='none'; return; }
   card.style.display='block';
-  masukanCard.style.display='block';
+  // Sembunyikan kotak Masukan/Saran global SELAMA proses checklist review masih berjalan,
+  // supaya tidak terlihat seperti review sudah selesai padahal masih ada checklist berikutnya.
+  const sedangReview = reviewQueue.length > 0 && reviewIndex < reviewQueue.length && document.getElementById('checklistCard').style.display !== 'none';
+  masukanCard.style.display = sedangReview ? 'none' : 'block';
   const bySlot = {'Primer':[], 'Sekunder':[], 'Tindakan':[]};
   all.forEach(e=>bySlot[e.slot].push(e));
   let html = '';
@@ -2587,6 +2590,7 @@ function processNextInQueue(){
   if(reviewIndex >= reviewQueue.length){
     document.getElementById('checklistCard').style.display='none';
     document.getElementById('masukanCard').style.display='none';
+    document.getElementById('masukanGlobalCard').style.display = allEntries().length ? 'block' : 'none';
     renderEpisodeList();
     document.getElementById('episodeCard').scrollIntoView({behavior:'smooth'});
     return;
@@ -2594,6 +2598,7 @@ function processNextInQueue(){
   const entry = reviewQueue[reviewIndex];
   currentReviewEntry = entry;
   const c = entry.matchedCase;
+  document.getElementById('masukanGlobalCard').style.display='none';
   document.getElementById('checklistStepLabel').textContent = `Checklist Bukti (${reviewIndex+1} dari ${reviewQueue.length}) — ${entry.slot}`;
   document.getElementById('checklistCard').style.display='block';
   document.getElementById('masukanCard').style.display='none';
