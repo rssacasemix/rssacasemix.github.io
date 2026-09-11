@@ -204,19 +204,11 @@
     </section>
 
     <section class="card" id="checklistCard" style="display:none;">
-      <div class="step-label" id="checklistStepLabel">Checklist Bukti Pendukung</div>
-      <div id="icdBadge"></div>
-      <h3 id="caseTitle" style="margin-bottom:4px;"></h3>
-      <div id="caseKriteria" class="sub" style="margin-bottom:14px;"></div>
-      <div id="checklistItems"></div>
-      <div id="ventilatorExtra" style="display:none; margin-top:14px;">
-        <div class="grid2">
-          <label class="field"><span>Jam mulai ventilator</span><input type="datetime-local" id="vtMulai"></label>
-          <label class="field"><span>Jam selesai ventilator</span><input type="datetime-local" id="vtSelesai"></label>
-        </div>
-        <div id="vtDurasiInfo" class="sub"></div>
+      <div class="step-label">Checklist Bukti Pendukung — Semua Diagnosis Bertanda WARNING</div>
+      <div id="allChecklistsContainer"></div>
+      <div class="row-actions">
+        <button class="primary" id="btnSelesaiSemuaChecklist">Selesai — Masukkan Semua ke Episode</button>
       </div>
-      <div id="suggestionBox"></div>
     </section>
 
     <section class="card" id="masukanCard" style="display:none;">
@@ -2377,6 +2369,7 @@ function resetChecklistState(){
   // sebelumnya) tidak nyangkut menampilkan data lama untuk entry yang sudah dihapus.
   reviewQueue = [];
   reviewIndex = 0;
+  reviewResults = [];
   currentReviewEntry = null;
   currentSuggestion = null;
   const cc = document.getElementById('checklistCard');
@@ -2569,63 +2562,73 @@ async function kirimMasukanGlobal(){
   }
 }
 
-// ===================== CHECKLIST REVIEW FLOW =====================
+// ===================== CHECKLIST REVIEW FLOW (SEMUA TAMPIL SEKALIGUS) =====================
+let reviewResults = []; // hasil evaluasi tiap item di reviewQueue, index selaras dengan reviewQueue
+
 document.getElementById('btnMulaiChecklist').addEventListener('click', ()=>{
   reviewQueue = allEntries().filter(e=>e.matchedCase);
   const unmatched = allEntries().filter(e=>!e.matchedCase);
   currentEpisode = unmatched.map(e=>({
     nama: e.text, kode: e.kode, codeType: (e.codeTypeReal || (e.slot==='Tindakan'?'ICD-9-CM':'ICD-10')), slot: e.slot, status:'N/A', catatan:''
   }));
-  reviewIndex = 0;
+  reviewResults = new Array(reviewQueue.length).fill(null);
   if(!reviewQueue.length){
     alert('Tidak ada kode yang cocok dengan pola dispute — semua entry sudah dianggap standar (N/A). Langsung lihat Episode di bawah.');
     renderEpisodeList();
     document.getElementById('checklistCard').scrollIntoView({behavior:'smooth'});
     return;
   }
-  processNextInQueue();
+  renderAllChecklists();
 });
 
-function processNextInQueue(){
-  if(reviewIndex >= reviewQueue.length){
-    document.getElementById('checklistCard').style.display='none';
-    document.getElementById('masukanCard').style.display='none';
-    document.getElementById('masukanGlobalCard').style.display = allEntries().length ? 'block' : 'none';
-    renderEpisodeList();
-    document.getElementById('episodeCard').scrollIntoView({behavior:'smooth'});
-    return;
-  }
-  const entry = reviewQueue[reviewIndex];
-  currentReviewEntry = entry;
-  const c = entry.matchedCase;
+function renderAllChecklists(){
   document.getElementById('masukanGlobalCard').style.display='none';
-  document.getElementById('checklistStepLabel').textContent = `Checklist Bukti (${reviewIndex+1} dari ${reviewQueue.length}) — ${entry.slot}`;
   document.getElementById('checklistCard').style.display='block';
-  document.getElementById('masukanCard').style.display='none';
-  document.getElementById('icdBadge').innerHTML = `<span class="icd-badge">${entry.kode ? (entry.codeTypeReal+': '+entry.kode) : (c.codeType+(c.kode?': '+c.kode:''))}</span>`;
-  document.getElementById('caseTitle').textContent = baseName(c.nama);
-  document.getElementById('caseKriteria').innerHTML = '<strong>Kriteria pengujian:</strong> ' + c.kriteria;
-  const box = document.getElementById('checklistItems');
-  box.innerHTML = '';
-  c.required.forEach(item=>{
-    box.insertAdjacentHTML('beforeend', `<div class="checklist-item"><input type="checkbox" data-role="req" id="chk_${item.id}"><label class="txt" for="chk_${item.id}">${item.label}</label></div>`);
+  const container = document.getElementById('allChecklistsContainer');
+  container.innerHTML = reviewQueue.map((entry, idx)=>{
+    const c = entry.matchedCase;
+    const badge = `<span class="icd-badge">${entry.kode ? (entry.codeTypeReal+': '+entry.kode) : (c.codeType+(c.kode?': '+c.kode:''))}</span>`;
+    const reqHtml = c.required.map(item=>`<div class="checklist-item"><input type="checkbox" data-role="req" id="chk_${idx}_${item.id}"><label class="txt" for="chk_${idx}_${item.id}">${item.label}</label></div>`).join('');
+    const dqHtml = c.disqualifiers.map(item=>`<div class="checklist-item flag"><input type="checkbox" data-role="dq" id="chk_${idx}_${item.id}"><label class="txt" for="chk_${idx}_${item.id}"><span class="flag-tag">Kondisi red-flag</span>${item.label}</label></div>`).join('');
+    const vtHtml = c.hasVentilatorTimer ? `
+      <div style="margin-top:14px;">
+        <div class="grid2">
+          <label class="field"><span>Jam mulai ventilator</span><input type="datetime-local" id="vtMulai_${idx}"></label>
+          <label class="field"><span>Jam selesai ventilator</span><input type="datetime-local" id="vtSelesai_${idx}"></label>
+        </div>
+        <div id="vtDurasiInfo_${idx}" class="sub"></div>
+      </div>` : '';
+    return `<div class="checklist-subcard" style="${idx>0?'border-top:1px solid var(--rule); padding-top:20px; margin-top:20px;':''}">
+      <div class="step-label">Diagnosis ${idx+1} dari ${reviewQueue.length} — ${entry.slot}</div>
+      ${badge}
+      <h3 style="margin-bottom:4px;">${baseName(c.nama)}</h3>
+      <div class="sub" style="margin-bottom:14px;"><strong>Kriteria pengujian:</strong> ${c.kriteria}</div>
+      <div>${reqHtml}${dqHtml}</div>
+      ${vtHtml}
+      <div id="suggestionBox_${idx}"></div>
+    </div>`;
+  }).join('');
+
+  reviewQueue.forEach((entry, idx)=>{
+    container.querySelectorAll(`#suggestionBox_${idx}`); // no-op placeholder to keep structure clear
+    const subcard = container.children[idx];
+    subcard.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change', ()=>evaluateCaseAt(idx)));
+    const vtMulai = document.getElementById(`vtMulai_${idx}`);
+    const vtSelesai = document.getElementById(`vtSelesai_${idx}`);
+    if(vtMulai && vtSelesai){
+      vtMulai.oninput = ()=>updateVentilatorDurasi(idx);
+      vtSelesai.oninput = ()=>updateVentilatorDurasi(idx);
+    }
+    evaluateCaseAt(idx); // set status default (Hold) sejak awal ditampilkan
   });
-  c.disqualifiers.forEach(item=>{
-    box.insertAdjacentHTML('beforeend', `<div class="checklist-item flag"><input type="checkbox" data-role="dq" id="chk_${item.id}"><label class="txt" for="chk_${item.id}"><span class="flag-tag">Kondisi red-flag</span>${item.label}</label></div>`);
-  });
-  document.getElementById('ventilatorExtra').style.display = c.hasVentilatorTimer ? 'block' : 'none';
-  document.getElementById('suggestionBox').innerHTML = '';
-  // (kotak masukan per-item sudah tidak dipakai — masukan sekarang satu tempat di bawah)
-  box.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change', evaluateCase));
-  document.getElementById('vtMulai').oninput = updateVentilatorDurasi;
-  document.getElementById('vtSelesai').oninput = updateVentilatorDurasi;
+
   document.getElementById('checklistCard').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-function updateVentilatorDurasi(){
-  const a = document.getElementById('vtMulai').value;
-  const b = document.getElementById('vtSelesai').value;
-  const info = document.getElementById('vtDurasiInfo');
+function updateVentilatorDurasi(idx){
+  const a = document.getElementById(`vtMulai_${idx}`).value;
+  const b = document.getElementById(`vtSelesai_${idx}`).value;
+  const info = document.getElementById(`vtDurasiInfo_${idx}`);
   if(a && b){
     const durasiJam = (new Date(b) - new Date(a)) / 3600000;
     if(durasiJam > 0){
@@ -2634,38 +2637,36 @@ function updateVentilatorDurasi(){
   } else { info.textContent = ''; }
 }
 
-function evaluateCase(){
-  const c = currentReviewEntry.matchedCase;
-  const dqChecked = c.disqualifiers.find(d=>document.getElementById('chk_'+d.id).checked);
-  const allRequired = c.required.every(r=>document.getElementById('chk_'+r.id).checked);
+function evaluateCaseAt(idx){
+  const entry = reviewQueue[idx];
+  const c = entry.matchedCase;
+  const dqChecked = c.disqualifiers.find(d=>document.getElementById(`chk_${idx}_${d.id}`).checked);
+  const allRequired = c.required.every(r=>document.getElementById(`chk_${idx}_${r.id}`).checked);
   let result;
   if(dqChecked){ result = {status:'Re-Code', note:dqChecked.label, target:dqChecked.target}; }
   else if(allRequired){ result = {status:'OK', note:'Seluruh bukti wajib terpenuhi.'}; }
   else { result = {status:'Hold', note:'Bukti pendukung belum lengkap — perlu konfirmasi ke DPJP.'}; }
-  currentSuggestion = result;
+  reviewResults[idx] = result;
   const labelMap = {OK:'Saran: OK (Clear)', 'Re-Code':'Saran: Perlu Re-Code', Hold:'Saran: Hold — Konfirmasi DPJP'};
-  document.getElementById('suggestionBox').innerHTML = `<div class="suggestion ${result.status}"><strong>${labelMap[result.status]}</strong>${result.note}${result.target ? ' — usulan kode: <strong>'+result.target+'</strong>' : ''}</div>`;
-  renderMasukanCard(result);
+  document.getElementById(`suggestionBox_${idx}`).innerHTML = `<div class="suggestion ${result.status}"><strong>${labelMap[result.status]}</strong>${result.note}${result.target ? ' — usulan kode: <strong>'+result.target+'</strong>' : ''}</div>`;
 }
 
-function renderMasukanCard(result){
-  document.getElementById('masukanCard').style.display='block';
-  const labelMap = {OK:'✓ Status otomatis: OK (Clear)', 'Re-Code':'⚠ Status otomatis: Perlu Re-Code', Hold:'⚠ Status otomatis: Hold — perlu konfirmasi DPJP'};
-  document.getElementById('statusOtomatisInfo').textContent = labelMap[result.status] + ' — item ini otomatis masuk ke Episode dengan status tersebut.';
-}
-
-document.getElementById('btnLanjutMasukan').addEventListener('click', ()=>{
-  const c = currentReviewEntry.matchedCase;
-  const entry = currentReviewEntry;
-  currentEpisode.push({
-    nama: entry.kode ? entry.text : baseName(c.nama),
-    kode: entry.kode || c.kode,
-    codeType: entry.codeTypeReal || c.codeType,
-    slot: entry.slot,
-    status: currentSuggestion.status, catatan: currentSuggestion.note
+document.getElementById('btnSelesaiSemuaChecklist').addEventListener('click', ()=>{
+  reviewQueue.forEach((entry, idx)=>{
+    const c = entry.matchedCase;
+    const result = reviewResults[idx];
+    currentEpisode.push({
+      nama: entry.kode ? entry.text : baseName(c.nama),
+      kode: entry.kode || c.kode,
+      codeType: entry.codeTypeReal || c.codeType,
+      slot: entry.slot,
+      status: result.status, catatan: result.note
+    });
   });
-  reviewIndex++;
-  processNextInQueue();
+  document.getElementById('checklistCard').style.display='none';
+  document.getElementById('masukanGlobalCard').style.display = allEntries().length ? 'block' : 'none';
+  renderEpisodeList();
+  document.getElementById('episodeCard').scrollIntoView({behavior:'smooth'});
 });
 
 // ===================== EPISODE (FINAL) =====================
