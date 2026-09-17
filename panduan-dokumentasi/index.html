@@ -1402,7 +1402,7 @@ const DOC_GUIDES = [
   ],
   catatan:"CURB-65: Confusion, Ureum>40mg/dL, RR>30x/menit, TD<90/60mmHg, Umur≥65th — tiap kriteria skor 1. Skor 0-1: rawat jalan; skor 2: pertimbangkan rawat inap; skor ≥3: pneumonia berat. Antibiotik empiris diberikan dalam 4-8 jam (pneumonia tidak berat) atau 1 jam (berat+sepsis) setelah diagnosis. Lihat juga kasus dispute Pneumonia untuk kriteria audit BPJS (KMK No. HK.02.02/MENKES/514/2015)."
 },
-{ id:"dhfguide", nama:"DHF / Demam Berdarah Dengue", kode:"A91",
+{ id:"dhfguide", nama:"Infeksi Dengue (Demam Dengue & DHF/DBD)", kode:"A90/A91",
   keywords:["dhf","dbd","demam berdarah","dengue"],
   sumber:"PNPK Kemenkes RI No. HK.01.07/MENKES/9845/2020",
   anamnesis:[
@@ -2499,12 +2499,15 @@ function findDocGuide(entry){
     if(best) return best;
   }
   // 2) Fallback: cocokkan berdasarkan kata kunci nama/keyword (untuk entry tanpa kode terstruktur)
+  //    Wajib KATA UTUH (word-boundary) — bukan sekadar substring, supaya "fever" pada query
+  //    tidak salah nyantol ke "typhoid fever" pada keyword guide lain.
   const q = normalize(text);
   if(!q) return null;
   const words = q.split(' ').filter(w=>w.length>3);
+  const hasWholeWord = (hay, w) => new RegExp('(^|\\s)' + w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '(\\s|$)').test(hay);
   return DOC_GUIDES.find(g=>{
     const hay = normalize(g.nama + ' ' + (g.keywords||[]).join(' '));
-    return hay.includes(q) || words.some(w=>hay.includes(w));
+    return hay.includes(q) || words.some(w=>hasWholeWord(hay, w));
   }) || null;
 }
 let docGuideCounter = 0;
