@@ -282,6 +282,7 @@ const CASES = [
   kode:"A41._", codeType:"ICD-10",
   keywords:["sepsis","susp sepsis","syok sepsis"],
   kriteria:"Tidak bisa dikode Sepsis jika hanya berdasarkan leukositosis ringan tanpa tanda kegagalan organ/SIRS, atau hanya antibiotik oral.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"s1", label:"Hasil kultur darah/sputum/urine POSITIF, atau SIRS/SOFA terpenuhi (fokus infeksi + ≥2 dari: suhu >38°/<36°, leukosit >12.000/<4.000, HR >90, RR >20)"},
     {id:"s2", label:"Penggunaan antibiotik spektrum luas via IV"}
@@ -294,6 +295,7 @@ const CASES = [
   kode:"A01.0", codeType:"ICD-10",
   keywords:["tifoid","typhoid","tipes","demam tifoid"],
   kriteria:"Sesuai KMK RI No. HK.02.02/MENKES/514/2015: Widal hanya valid bila titer tinggi (≥1:320) di daerah endemis, ATAU kenaikan titer ≥4x pada 2x pemeriksaan berjarak 5–7 hari. Satu kali periksa saja tidak cukup.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"tf1", label:"Kultur Salmonella POSITIF, ATAU Widal titer ≥1:320 di daerah endemis, ATAU kenaikan titer ≥4x pada 2x pemeriksaan Widal berjarak 5–7 hari"}
   ],
@@ -304,6 +306,7 @@ const CASES = [
   kode:"A91", codeType:"ICD-10",
   keywords:["dhf","dbd","demam berdarah","dengue"],
   kriteria:"Jika trombositopenia tanpa bukti kebocoran plasma, kode harus disesuaikan menjadi Dengue Fever/DD (A90).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"d1", label:"Hasil lab seri (Hematokrit &amp; Trombosit)"},
     {id:"d2", label:"Bukti kebocoran plasma: Hematokrit naik >20%, efusi pleura (USG/foto toraks), atau ascites"}
@@ -316,6 +319,7 @@ const CASES = [
   kode:"J18._", codeType:"ICD-10",
   keywords:["pneumonia","paru","bronkopneumonia"],
   kriteria:"Sesuai KMK RI No. HK.02.02/MENKES/514/2015: infiltrat baru/progresif pada foto toraks + minimal 2 dari 5 gejala penyerta. Antibiotik &lt;72 jam tanpa skor CURB-65/PSI dianggap tidak sesuai.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"p1", label:"Foto toraks: infiltrat BARU atau progresif (bukan gambaran lama/statis)"},
     {id:"p2", label:"Minimal 2 dari 5 gejala: batuk bertambah, perubahan karakter dahak/purulen, suhu &gt;38°C, tanda konsolidasi/ronki, leukosit &gt;10.000 atau &lt;4.500"},
@@ -328,6 +332,7 @@ const CASES = [
   kode:"J96._", codeType:"ICD-10",
   keywords:["gagal napas","respiratory failure","ards","sesak berat"],
   kriteria:"Tidak boleh dikode Gagal Napas jika pasien hanya memakai kanul hidung 4L/menit tanpa data AGD/ancaman napas di CPPT.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"gn1", label:"Hasil AGD/BGA: PaO2 <60 mmHg atau PaCO2 >50 mmHg"},
     {id:"gn2", label:"Penggunaan ventilator, atau Oksigen High Flow (HFNC/NRM)"}
@@ -339,6 +344,7 @@ const CASES = [
   kode:"I50._", codeType:"ICD-10",
   keywords:["gagal jantung","chf","decompensatio cordis","jantung bengkak"],
   kriteria:"Kode Heart Failure memerlukan bukti edema sistemik/paru dan pemberian terapi diuretik/inotropik intensif. Kode spesifik I50.1 WAJIB didukung hasil Echocardiography, bukan hanya EKG+foto toraks.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"gj1", label:"Rekaman EKG &amp; foto toraks (kardiomegali/edema paru)"},
     {id:"gj2", label:"Terapi diuretik IV (furosemide) atau inotropik"},
@@ -352,6 +358,7 @@ const CASES = [
   kode:"N17._", codeType:"ICD-10",
   keywords:["aki","gagal ginjal akut","gangguan ginjal akut"],
   kriteria:"Sesuai kriteria KDIGO 2012 — berdasarkan peningkatan kreatinin serum dan/atau penurunan urine output. Wajar dikode pada episode pertama tanpa baseline; pada kondisi berulang tanpa perbaikan sebelumnya, arahkan ke Gagal Ginjal Kronik.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"aki1", label:"Serial ureum &amp; kreatinin serum"},
     {id:"aki2", label:"Kenaikan kreatinin ≥0,3 mg/dL dalam 48 jam, atau ≥1,5x nilai baseline"},
@@ -365,6 +372,7 @@ const CASES = [
   kode:"D63._", codeType:"ICD-10",
   keywords:["anemia","anemia sekunder","hb rendah"],
   kriteria:"Anemia sekunder valid bila disebabkan komplikasi penyakit utama (terapi anemia berbeda dari terapi utama, misal perlu transfusi/eritropoietin) atau anemia gravis (Hb &lt;8) pada penyakit kronik yang perlu tatalaksana khusus.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"an1", label:"Hasil darah lengkap: Hb &lt;8 g/dL atau sesuai standar klinis"},
     {id:"an2", label:"Bukti transfusi PRC terpasang di lembar observasi, ATAU (bila tanpa transfusi) ada evaluasi khusus pemberian besi/eritropoietin IV dengan kepastian penyebab anemia primer diobati"}
@@ -374,6 +382,7 @@ const CASES = [
   kode:"E10.1/E11.1", codeType:"ICD-10",
   keywords:["kad","ketoasidosis","diabetic ketoacidosis"],
   kriteria:"Tanpa bukti keton positif dan asidosis metabolik, klaim wajib diturunkan menjadi Diabetes Melitus dengan Hiperglikemia.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"kad1", label:"Hasil gula darah &gt;250 mg/dL"},
     {id:"kad2", label:"Hasil keton urin/darah POSITIF"},
@@ -386,6 +395,7 @@ const CASES = [
   kode:null, codeType:"ICD-9-CM",
   keywords:["sc","sectio","sesar","caesar"],
   kriteria:"Indikasi SC atas permintaan pasien tanpa pertimbangan medis akan ditolak BPJS.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"sc1", label:"Laporan operasi SC lengkap"},
     {id:"sc2", label:"Indikasi SC terdokumentasi &amp; selaras dengan diagnosis ibu/janin (mis. CPD, fetal distress, KPD &gt;12 jam, letak sungsang)"}
@@ -397,6 +407,7 @@ const CASES = [
   kode:"86.22", codeType:"ICD-9-CM",
   keywords:["debridement","nekrotomi","luka"],
   kriteria:"Membedakan koding Debridement Eksisi (86.22) dengan sekadar pembersihan luka/ganti balut biasa.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"db1", label:"Laporan operasi/tindakan tersedia"},
     {id:"db2", label:"Keterangan jaringan yang dieksisi sampai lapisan kulit/otot/tulang"}
@@ -409,6 +420,7 @@ const CASES = [
   kode:"96.7_", codeType:"ICD-9-CM",
   keywords:["ventilator","intubasi","ventilasi mekanik"],
   kriteria:"Durasi akumulatif jam penggunaan ventilator (kurang dari atau ≥96 jam) menentukan spesifikasi kode ICD-9-CM.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"vt1", label:"Lembar observasi ICU/HCU tersedia"},
     {id:"vt2", label:"Catatan setting ventilator &amp; jam mulai s.d. selesai tercatat"}
@@ -421,6 +433,7 @@ const CASES = [
   kode:"N39.0", codeType:"ICD-10",
   keywords:["isk","infeksi saluran kemih","kencing"],
   kriteria:"ISK ditegakkan dari gejala klinis khas DENGAN leukosit urin, atau dari kultur urin positif — bukan dari nyeri perut umum yang tidak spesifik lokasinya.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"isk1", label:"Gejala klinis khas (minimal satu): sakit kencing, nyeri perut bawah, nyeri tekan suprapubik, anyang-anyangan, nyeri pinggang, atau nyeri ketok CVA, DISERTAI leukosit urin &gt;10/LPB"}
   ],
@@ -431,6 +444,7 @@ const CASES = [
   kode:"R57._", codeType:"ICD-10",
   keywords:["syok","shock"],
   kriteria:"Sesuai kriteria klinis: Syok Kardiogenik bila TD &lt;90 mmHg tanpa inotropik, atau TD &lt;80 mmHg dengan inotropik, DAN Ejection Fraction &lt;50%. BPJS/verifikator sering meminta kode SPESIFIK (kardiogenik/hipovolemik/anafilaktik/septik), bukan R57.9, bila etiologi klinis sudah jelas. Tidak boleh dikoding bila tidak tegak secara medis dan tidak ada resource khusus.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"sy1", label:"Bukti tekanan darah rendah terdokumentasi DAN tindakan resusitasi spesifik tercatat (loading cairan, vasopressor/inotropik)"},
     {id:"sy2", label:"Etiologi/jenis syok dapat ditentukan dari data klinis (kardiogenik: EF turun/penyakit jantung; hipovolemik: perdarahan/dehidrasi; anafilaktik: alergen+reaksi; septik: fokus infeksi)"}
@@ -443,6 +457,7 @@ const CASES = [
   kode:"J90/J91", codeType:"ICD-10",
   keywords:["efusi pleura","cairan paru"],
   kriteria:"Efusi pleura valid sebagai diagnosis sekunder bila terbukti dengan tindakan pungsi/torakosintesis, atau imaging yang disertai tindakan pungsi walau cairan minimal. Bila ada TB: gunakan kode gabungan Tuberculous Pleurisy A15.6/A16.5. Bila cairan pleura menunjukkan keganasan yang tegak medis: C78.2; bila tanpa riwayat kanker primer namun ditemukan keganasan di cairan pleura: C38.3.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ep1", label:"Terbukti dengan tindakan pungsi pleura/torakosintesis, ATAU imaging (foto/USG toraks) DISERTAI tindakan pungsi (walau cairan keluar minimal)"}
   ],
@@ -453,6 +468,7 @@ const CASES = [
   kode:"R00.1/I47-I49", codeType:"ICD-10",
   keywords:["aritmia","bradikardia","takikardia","atrial fibrilasi","afib"],
   kriteria:"R00.1 (Bradycardia, unspecified) hanya untuk kondisi yang belum teridentifikasi jenisnya. Bila EKG sudah menunjukkan jenis aritmia spesifik, wajib gunakan kode spesifik I47–I49. Kecuali: abnormalitas pada masa perinatal gunakan P29.1 (bukan R00.1/I47-I49).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ar1", label:"Rekaman EKG tersedia dan sudah dibaca/diinterpretasi"}
   ],
@@ -463,6 +479,7 @@ const CASES = [
   kode:"O10-O14", codeType:"ICD-10",
   keywords:["hipertensi kehamilan","preeklampsia","pe","hdk"],
   kriteria:"O10 untuk hipertensi yang sudah ada SEBELUM kehamilan; O13/O14 untuk hipertensi yang timbul SELAMA kehamilan disertai proteinuria. Riwayat sebelum-hamil harus jelas untuk memilih kode yang tepat. Catatan konteks klinis (PNPK Kemenkes No. 701/2026): secara klinis PE sebenarnya bisa ditegakkan tanpa proteinuria bila ada bukti keterlibatan organ lain — namun secara praktik verifikasi BPJS di RS ini, proteinuria tetap jadi bukti pendukung utama yang diminta, jadi tetap upayakan ada sebelum klaim diajukan.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"htk1", label:"Riwayat tekanan darah SEBELUM kehamilan terdokumentasi jelas (ada riwayat HT atau tidak)"},
     {id:"htk2", label:"Bila timbul selama kehamilan: ada hasil pemeriksaan proteinuria yang mendukung"}
@@ -474,6 +491,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["kombinasi kode","kode gabungan"],
   kriteria:"Beberapa kondisi punya kode ICD-10 gabungan resmi dan WAJIB dipakai, bukan dientry terpisah — contoh: HT+CKD+Gagal Jantung → I13.2; DM dengan nefropati → E11.2 didampingi N08.3; PPOK (J44.8-J44.9) dengan Pneumonia (J12-J18) atau ISPA (J20-J22) → J44.0; Batu Ginjal (N20.-) dengan Hidronefrosis (N13.3) → N13.2.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"kk1", label:"Sudah dicek kombinasi diagnosis pasien terhadap kode gabungan resmi (HT+CKD+CHF; DM+nefropati; PPOK+Pneumonia/ISPA; Batu Ginjal+Hidronefrosis)"}
   ],
@@ -485,6 +503,7 @@ const CASES = [
   keywords:["cardiac arrhytmia","aritmia jantung","atrial fibrilation","svt","vt"],
   sumber:"Buku Koding RSUD Saras Adyatma — Catatan After Verif Internal",
   kriteria:"Sesuai catatan verifikasi internal RS: diagnosis aritmia jantung (Atrial Fibrilasi/SVT/VT/dll) wajib disertai bukti pemberian obat beta bloker sampai pasien pulang.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ca1", label:"Ada pemberian obat beta bloker (mis. bisoprolol/Concor) sampai dengan pasien pulang, tercatat di CPPT/resume medis"}
   ],
@@ -495,6 +514,7 @@ const CASES = [
   kode:"73.6", codeType:"ICD-9-CM",
   keywords:["robekan jalan lahir","episiotomi","laserasi perineum"],
   kriteria:"Robekan/episiotomi yang terjadi sebagai bagian dari proses persalinan normal dikode 73.6 — bukan 75.69 — karena termasuk satu rangkaian tindakan persalinan.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"rj1", label:"Robekan/episiotomi terjadi dalam rangkaian proses persalinan (bukan tindakan terpisah pasca persalinan)"}
   ],
@@ -505,6 +525,7 @@ const CASES = [
   kode:"O83", codeType:"ICD-10",
   keywords:["persalinan tindakan","vakum","forceps","ekstraksi vakum"],
   kriteria:"Persalinan dengan bantuan alat/tindakan (vakum ekstraksi, forceps, dll) dikode O83 (Assisted single delivery) — bukan O80 (persalinan normal spontan). Catatan: prosedur induksi persalinan (artificial rupture of membranes/medical induction) TIDAK perlu dikode terpisah karena sudah termasuk dalam prosedur utama persalinan.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ad1", label:"Ada catatan tindakan bantuan persalinan (vakum ekstraksi/forceps/manually assisted delivery) di laporan persalinan"}
   ],
@@ -516,6 +537,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["malnutrisi","kaheksia","gizi buruk"],
   kriteria:"Diagnosis sekunder malnutrisi/kaheksia wajib disertai bukti klinis objektif (penilaian status gizi, IMT, LILA, dll) — bukan sekadar disebutkan di resume.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"mk1", label:"Ada penilaian status gizi objektif (IMT, LILA, atau skrining gizi) yang mendukung diagnosis"}
   ],
@@ -526,6 +548,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["stt","tumor jaringan lunak","benjolan","massa"],
   kriteria:"Sesuai BA Kesepakatan No 1247/BA/1124: rawat inap untuk eksisi STT sah bila deep tumor (di bawah fascia/menginfiltrasi), ATAU dimensi &gt;4cm meluas ke struktur vital, ATAU ada keganasan. Selain itu, harus rawat jalan.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"stt1", label:"Laporan operasi menyebutkan eksplorasi/massa di BAWAH fascia (deep tumor), ATAU dimensi &gt;4cm meluas ke struktur vital, ATAU hasil PA menunjukkan keganasan"}
   ],
@@ -536,6 +559,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["ckd anak","gagal ginjal kronik anak"],
   kriteria:"Rawat inap CKD pada anak sah bila memenuhi minimal satu: overload cairan, imbalance elektrolit, pemasangan/malfungsi akses dialisis, hipoalbumin &lt;2,5, atau perlu transfusi sesuai kriteria.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ckda1", label:"Memenuhi minimal satu: overload cairan (sesak/bengkak kelopak mata-kaki-perut), imbalance elektrolit, pemasangan/malfungsi akses dialisis, hipoalbumin &lt;2,5, atau perlu transfusi sesuai kriteria"}
   ],
@@ -546,6 +570,7 @@ const CASES = [
   kode:"A27._", codeType:"ICD-10",
   keywords:["leptospirosis","lepto"],
   kriteria:"Leptospirosis wajib dikonfirmasi dengan hasil serologi IgM/IgG POSITIF. Bila negatif, diagnosis harus dihapus. Catatan konteks klinis (Pedoman Diagnosis Laboratoris Leptospirosis, Balai Litbangkes Kemenkes): secara klinis serologi negatif di fase awal (hari 1-7) sebenarnya belum tentu menyingkirkan diagnosis karena proses seroconversion butuh waktu — pertimbangkan px ulang bila klinis masih sangat mengarah — namun untuk keperluan klaim BPJS, bukti serologi/konfirmasi lab POSITIF tetap yang diminta.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"lepto1", label:"Hasil pemeriksaan serologi IgM/IgG Leptospira POSITIF"}
   ],
@@ -556,6 +581,7 @@ const CASES = [
   kode:"A49.9", codeType:"ICD-10",
   keywords:["bacterial infection","infeksi bakteri"],
   kriteria:"A49.9 hanya dipakai bila etiologi benar-benar belum bisa ditentukan. Bila data klinis mendukung diagnosis lebih spesifik, wajib direseleksi.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"bi1", label:"Sudah dipastikan tidak ada data klinis/lab yang mengarah ke diagnosis infeksi lebih spesifik"}
   ],
@@ -566,6 +592,7 @@ const CASES = [
   kode:"I63/I61 vs I69", codeType:"ICD-10",
   keywords:["stroke","cva","stroke infark"],
   kriteria:"Stroke baru memerlukan bukti imaging (CT/MRI) yang mendukung kejadian akut. Tanpa itu atau bila menunjukkan lesi lama, harus dikode sebagai Sequele (I69), bukan stroke akut.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"str1", label:"Hasil CT-Scan/MRI kepala mendukung lesi/infark AKUT sesuai onset klinis saat ini"}
   ],
@@ -576,6 +603,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["rujuk cepat","rujukan","dirujuk"],
   kriteria:"Pasien rawat inap yang dirujuk dalam waktu &lt;6 jam sejak masuk seharusnya ditagihkan sebagai Rawat Jalan (RJTL), bukan Rawat Inap (RITL).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"rc1", label:"Rentang waktu dari jam masuk sampai jam advis/pelaksanaan rujuk ≥6 jam, tercatat jelas di CPPT"}
   ],
@@ -586,6 +614,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["kontrol rutin","kns","kunjungan berulang"],
   kriteria:"Kontrol rutin penyakit kronis stabil (KNS) yang berulang tanpa perubahan kondisi/terapi dalam interval berdekatan berpotensi dianggap Tidak Layak/duplikat oleh BPJS.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"kns1", label:"Ada perubahan kondisi klinis, hasil pemeriksaan, atau penyesuaian terapi yang mendukung perlunya kunjungan ulang"}
   ],
@@ -596,6 +625,7 @@ const CASES = [
   kode:"E87.6", codeType:"ICD-10",
   keywords:["hipokalemia","kalium rendah","k rendah"],
   kriteria:"Valid sebagai DS bila kalium &lt;3,5 mEq/L DAN ada tatalaksana/terapi yang diberikan. Pada anak: kalium &lt;3 dan/atau gejala klinis (lemah otot, kembung, aritmia, bising usus menurun). Pada penyakit jantung penyerta: ambang &lt;3,5.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"hk1", label:"Kadar kalium di bawah ambang sesuai kondisi pasien (dewasa &lt;3,5; anak &lt;3 atau bergejala; jantung &lt;3,5)"},
     {id:"hk2", label:"Ada tatalaksana/terapi koreksi kalium yang diberikan dan tercatat"}
@@ -607,6 +637,7 @@ const CASES = [
   kode:"E87.1", codeType:"ICD-10",
   keywords:["hiponatremia","natrium rendah","na rendah"],
   kriteria:"Valid sebagai DS bila natrium &lt;135 mEq/L DAN ada tatalaksana/terapi. Pada anak: natrium &lt;130 dan/atau gejala klinis (kejang, penurunan kesadaran, dehidrasi berat). Pada penyakit jantung penyerta: ambang &lt;135.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"hn1", label:"Kadar natrium di bawah ambang sesuai kondisi pasien (dewasa &lt;135; anak &lt;130 atau bergejala)"},
     {id:"hn2", label:"Ada tatalaksana/terapi koreksi natrium yang diberikan dan tercatat"}
@@ -618,6 +649,7 @@ const CASES = [
   kode:"D72.8", codeType:"ICD-10",
   keywords:["leukositosis","leukosit tinggi"],
   kriteria:"Bukan leukositosis akibat infeksi, obat (GCSF/steroid), atau MPN. Pada kehamilan, leukosit sampai 16.000/µL masih fisiologis dan bukan diagnosis tersendiri.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"lk1", label:"Leukositosis BUKAN disebabkan infeksi aktif, pemberian obat (GCSF/steroid), atau keganasan mieloproliferatif (MPN)"}
   ],
@@ -628,6 +660,7 @@ const CASES = [
   kode:"N18.9", codeType:"ICD-10",
   keywords:["insufisiensi renal","gfr rendah"],
   kriteria:"Ditegakkan bila GFR &lt;60, atau kreatinin &gt;1,1 (wanita) / &gt;1,3 (pria). Pada anak perlu pemeriksaan ureum-kreatinin berulang.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ir1", label:"Nilai GFR &lt;60, ATAU kreatinin &gt;1,1 (wanita)/&gt;1,3 (pria); pada anak ada pemeriksaan ureum-kreatinin berulang"}
   ],
@@ -638,6 +671,7 @@ const CASES = [
   kode:null, codeType:"ICD-9-CM",
   keywords:["skin graft","flap","cangkok kulit"],
   kriteria:"Tidak dijamin bila terkait kosmetik. Pastikan graft wajar dilakukan (luka/injury luas dan dalam, bukan luka kecil). Kode berbeda tergantung lokasi: payudara 85.71-85.76, bibir/mulut 27.57, kelopak mata termasuk kode rekonstruksi 08.61, telinga termasuk kode rekonstruksi 18.6/18.79, eksisi luas 86.4, sindaktili 86.70, release kontraktur 86.84.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"sg1", label:"Indikasi medis jelas (luka/injury luas dan dalam) — BUKAN untuk tujuan kosmetik"},
     {id:"sg2", label:"Kode lokasi sudah dicocokkan dengan pedoman (payudara/bibir/kelopak mata/telinga/eksisi luas/sindaktili/kontraktur), bukan kode graft generik"}
@@ -649,6 +683,7 @@ const CASES = [
   kode:null, codeType:"ICD-9-CM",
   keywords:["adhesiolysis","perlekatan","adhesi"],
   kriteria:"Teknik tumpul/digital/manual/mekanik/tanpa instrumen di-OMIT (tidak dikode). Hanya teknik tajam (surgical) yang dikode. Bukan bagian dari prosedur utama yang memang harus mencakup adhesiolisis (mis. apendiktomi).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ah1", label:"Teknik adhesiolysis yang dilakukan adalah TAJAM/surgical (bukan tumpul/digital/manual/mekanik)"},
     {id:"ah2", label:"Adhesiolysis bukan bagian tak terpisahkan dari prosedur utama (mis. bukan bagian rutin apendiktomi)"}
@@ -660,6 +695,7 @@ const CASES = [
   kode:null, codeType:"ICD-9-CM",
   keywords:["hemorrhoid","wasir","ambeien"],
   kriteria:"Perhatikan laporan operasi apakah tindakan berupa eksisi hemorrhoid atau hanya injeksi skleroterapi — kode ICD-9-CM berbeda untuk keduanya.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"hm1", label:"Laporan operasi menyebutkan jenis tindakan secara eksplisit: eksisi ATAU injeksi/skleroterapi"}
   ],
@@ -670,6 +706,7 @@ const CASES = [
   kode:"69.01", codeType:"ICD-9-CM",
   keywords:["kuret","terminasi kehamilan","blighted ovum","kuretase"],
   kriteria:"Kode 69.01 khusus untuk kuret terminasi kehamilan dan Blighted Ovum — pastikan indikasi sesuai, bukan kuret untuk indikasi ginekologi lain.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"kt1", label:"Indikasi tindakan adalah terminasi kehamilan ATAU Blighted Ovum (bukan indikasi ginekologi lain)"}
   ],
@@ -680,6 +717,7 @@ const CASES = [
   kode:"O47._", codeType:"ICD-10",
   keywords:["persalinan preterm","preterm","kelahiran prematur"],
   kriteria:"Bila pasien dengan ancaman persalinan preterm mendapat terapi konservatif (tokolitik dll) dan TIDAK jadi melahirkan, dikode O47._ (disesuaikan usia kehamilan) — bukan kode persalinan aktual.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"pp1", label:"Pasien mendapat terapi konservatif (tokolitik/tirah baring/dll) untuk mencegah persalinan preterm"},
     {id:"pp2", label:"Pasien TIDAK melahirkan selama episode rawat ini (pulang masih hamil)"}
@@ -691,6 +729,7 @@ const CASES = [
   kode:"R04.2", codeType:"ICD-10",
   keywords:["hemoptisis","batuk darah"],
   kriteria:"Jika hemoptisis merupakan bagian/gejala dari diagnosis utama (mis. TB Paru), TIDAK dikode terpisah sebagai diagnosis sekunder — cukup diagnosis utamanya saja.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"hp1", label:"Hemoptisis bukan gejala yang sudah tercakup dalam diagnosis utama (etiologi berbeda/tambahan)"}
   ],
@@ -701,6 +740,7 @@ const CASES = [
   kode:"R50.9", codeType:"ICD-10",
   keywords:["demam","febris","fever"],
   kriteria:"R50.9 hanya dipakai bila etiologi demam benar-benar belum bisa dipastikan. Bila demam adalah bagian dari gejala penyakit yang sudah terdiagnosis, tidak dikode terpisah.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"dm1", label:"Sudah dipastikan etiologi demam belum bisa ditentukan meski sudah dilakukan pemeriksaan penunjang"}
   ],
@@ -711,6 +751,7 @@ const CASES = [
   kode:"R13+28.2", codeType:"ICD-10",
   keywords:["disfagia","tonsilektomi","sulit menelan"],
   kriteria:"Disfagia (R13) dapat dikoding bersama Tonsilektomi (28.2) khusus pada pasien ANAK dengan gizi kurang akibat gangguan menelan (BB kurang dibanding usia atau IMT menurut usia rendah).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"dt1", label:"Pasien anak DENGAN bukti gizi kurang akibat gangguan menelan (BB/IMT menurut usia rendah, terdokumentasi)"}
   ],
@@ -721,6 +762,7 @@ const CASES = [
   kode:"57.94", codeType:"ICD-9-CM",
   keywords:["kateter urin","dc","folley","pasang kateter"],
   kriteria:"Pemasangan/pelepasan kateter urin (57.94) harus ada indikasi medis jelas (retensi urin, monitoring ketat, dll) — bukan tindakan rutin tanpa alasan klinis.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ku1", label:"Ada indikasi medis jelas untuk pemasangan/pelepasan kateter urin (retensi urin, monitoring balance cairan ketat, pra/pasca operasi tertentu, dll)"}
   ],
@@ -731,6 +773,7 @@ const CASES = [
   kode:"88.78", codeType:"ICD-9-CM",
   keywords:["usg kehamilan","usg hamil","usg berulang"],
   kriteria:"USG kehamilan lebih dari 1x/bulan hanya dijamin bila ada indikasi risiko tinggi (PE, oligohidramnion/polihidramnion, IUGR, malposisi janin, kehamilan aterm perlu evaluasi mingguan, dll). Tanpa indikasi risti, kunjungan ekstra tidak dijamin.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ukb1", label:"Ada indikasi risiko tinggi kehamilan yang mendasari USG ulang (PE, oligo/polihidramnion, IUGR, malposisi, kehamilan aterm, dll), tercatat di rekam medis"}
   ],
@@ -741,6 +784,7 @@ const CASES = [
   kode:"88.79", codeType:"ICD-9-CM",
   keywords:["usg post persalinan","usg postpartum","usg nifas"],
   kriteria:"USG post persalinan normal tanpa indikasi TIDAK dijamin. Valid bila ada indikasi seperti subinvolusi uteri, retensi plasenta, atau komplikasi nifas lain yang terdokumentasi.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"upp1", label:"Ada indikasi komplikasi nifas yang mendasari (subinvolusi uteri, retensi plasenta, dll), dengan ukuran/temuan klinis dicatat"}
   ],
@@ -751,6 +795,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["fragmentasi","kunjungan berulang","3 hari"],
   kriteria:"Kunjungan berulang (poli berbeda atau sama) dalam interval kurang dari 3 hari untuk kondisi terkait berpotensi dianggap satu episode (fragmentasi klaim), bukan diklaim terpisah.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"fr1", label:"Kunjungan berjarak ≥3 hari dari kunjungan sebelumnya, ATAU untuk keluhan/kondisi yang benar-benar tidak berkaitan"}
   ],
@@ -761,6 +806,7 @@ const CASES = [
   kode:"78.5/79.3_", codeType:"ICD-9-CM",
   keywords:["fiksasi fraktur","orif","reduksi fraktur"],
   kriteria:"Kode 78.5 (internal fixation TANPA reduksi) hanya bila memang tidak dilakukan reduksi. Bila dilakukan reduksi (mengembalikan posisi tulang) sebelum fiksasi, gunakan kode 79.3_ (open/closed reduction with internal fixation).",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"ff1", label:"Laporan operasi menyebutkan jelas: DENGAN reduksi atau TANPA reduksi sebelum fiksasi"}
   ],
@@ -771,6 +817,7 @@ const CASES = [
   kode:"69.7/97.71", codeType:"ICD-9-CM",
   keywords:["iud","kb","kontrasepsi","spiral"],
   kriteria:"Kode 69.7 untuk pemasangan IUD baru. Kode 97.71 untuk pelepasan IUD. Pastikan sesuai tindakan aktual (kadang salah kode karena keduanya sama-sama tindakan 'KB').",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"iud1", label:"Sudah dicek laporan tindakan: PASANG (baru) atau LEPAS IUD, sesuai kode yang dipilih"}
   ],
@@ -781,6 +828,7 @@ const CASES = [
   kode:"40.11/40.29", codeType:"ICD-9-CM",
   keywords:["biopsi kgb","kelenjar getah bening","limfadenopati","fnab"],
   kriteria:"Bila jaringan diambil melalui EKSISI (bukan FNAB/jarum halus), kode yang tepat BUKAN 86.11 (biopsi kulit) — cek apakah harusnya 40.11 (biopsy of lymphatic structure) atau 40.29 (excision of lymphatic structure) sesuai teknik.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"bk1", label:"Teknik pengambilan jaringan sudah dipastikan: FNAB (jarum halus) atau eksisi terbuka"}
   ],
@@ -791,6 +839,7 @@ const CASES = [
   kode:"93.57", codeType:"ICD-9-CM",
   keywords:["ganti verband","gv","dressing","rawat luka"],
   kriteria:"Tindakan ganti verband/rawat luka (GV) yang bukan debridement seharusnya dikode 93.57 (application of other wound dressing), bukan kode debridement atau kode lain.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"gv1", label:"Tindakan yang dilakukan murni ganti balutan/dressing (bukan debridement jaringan nekrotik)"}
   ],
@@ -801,6 +850,7 @@ const CASES = [
   kode:null, codeType:"Aturan",
   keywords:["sarpras","sarana prasarana","sisrute","rujuk sarpras"],
   kriteria:"Sesuai BA Kesepakatan & Sisrute: kondisi yang butuh sarana prasarana lebih memadai (mis. ICU/alat khusus tidak tersedia) dan pasien dirujuk, tidak termasuk penjaminan rawat inap penuh di faskes asal.",
+  sumberData:"Pola dispute internal RS (WARNING BPJS / VPK / verifikasi berkas) — bukan hasil grouping resmi e-Klaim/BPJS",
   required:[
     {id:"sp1", label:"Fasilitas/sarana prasarana yang dibutuhkan pasien TERSEDIA dan memadai di faskes ini selama rawat inap"}
   ],
@@ -2803,6 +2853,7 @@ function renderAllChecklists(){
       ${badge}
       <h3 style="margin-bottom:4px;">${baseName(c.nama)}</h3>
       <div class="sub" style="margin-bottom:14px;"><strong>Kriteria pengujian:</strong> ${c.kriteria}</div>
+      ${c.sumberData ? `<div class="sub" style="margin-bottom:14px; font-size:.82rem; opacity:.75;"><strong>Sumber data pola dispute:</strong> ${c.sumberData}</div>` : ''}
       <div>${reqHtml}${dqHtml}</div>
       ${vtHtml}
       <div id="suggestionBox_${idx}"></div>
