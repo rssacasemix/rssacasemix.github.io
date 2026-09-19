@@ -2242,11 +2242,43 @@ function normalizeMasterQuery(s){
     .replace(/\s+/g,' ')
     .trim();
 }
+// Index istilah bahasa Indonesia -> prefiks kode ICD-10/ICD-9, dibangun sekali dari data
+// DOC_GUIDES (nama + keywords Indonesia yang sudah kita tulis untuk ~60 diagnosis).
+// Ini memungkinkan pencarian pakai bahasa Indonesia tapi tetap mengarah ke ICD baku.
+let _indoTermIndexCache = null;
+function buildIndoTermIndex(){
+  if(_indoTermIndexCache) return _indoTermIndexCache;
+  const index = []; // [{term, prefixes:[...]}]
+  (typeof DOC_GUIDES !== 'undefined' ? DOC_GUIDES : []).forEach(g=>{
+    if(!g.kode) return;
+    const prefixes = parseKodePatterns(g.kode);
+    if(!prefixes.length) return;
+    const terms = new Set();
+    (g.keywords||[]).forEach(k=>terms.add(normalizeMasterQuery(k)));
+    terms.add(normalizeMasterQuery(baseName(g.nama)));
+    terms.forEach(t=>{ if(t && t.length>2) index.push({term:t, prefixes}); });
+  });
+  // istilah terpanjang dicek duluan supaya frasa spesifik menang atas kata umum
+  index.sort((a,b)=>b.term.length - a.term.length);
+  _indoTermIndexCache = index;
+  return index;
+}
+
 function searchMasterList(query, master, limit){
   const qRaw = normalizeMasterQuery(query);
   if(!qRaw) return [];
   const qCode = qRaw.replace(/\s/g,'').toUpperCase();
   const words = qRaw.split(' ').filter(w=>w.length>1);
+
+  // Cocokkan dulu ke istilah Indonesia (dari Panduan Dokumentasi) -> kumpulkan prefiks kode yang di-boost
+  const boostPrefixes = new Set();
+  const indoIndex = buildIndoTermIndex();
+  for(const entry of indoIndex){
+    if(qRaw === entry.term || (' '+qRaw+' ').includes(' '+entry.term+' ') || (' '+entry.term+' ').includes(' '+qRaw+' ')){
+      entry.prefixes.forEach(p=>boostPrefixes.add(p));
+    }
+  }
+
   const results = [];
   for(let i=0;i<master.length;i++){
     const code = master[i][0];
@@ -2256,6 +2288,7 @@ function searchMasterList(query, master, limit){
     let score = 0;
     if(codeUp === qCode) score = 200;
     else if(qCode.length>=2 && codeUp.startsWith(qCode)) score = 100;
+    else if(boostPrefixes.size && Array.from(boostPrefixes).some(p=>codeUp.startsWith(p))) score = 150;
     else if(displayLow.startsWith(qRaw)) score = 60;
     else if(displayLow.includes(qRaw)) score = 30;
     else {
